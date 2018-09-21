@@ -23,7 +23,7 @@ PANDOC_PDF_ARGS= --include-before $(TMP_BEFORE_TEX)
 PANDOC_HTML_ARGS= --include-before $(TMP_HTML_HEADER) --metadata "title=Getting Started With Ledger - $(TODAY) $(GITSHA)" --standalone --css pandoc.css
 PANDOC_EPUB_ARGS= $(TMP_EPUB_TITLE)
 
-all: pdf epub slices html
+all: pdf epub slices html ## launch all generation target
 
 pre: before.tex epub_title.txt html_header.html
 	mkdir -p $(TMP_DIR)
@@ -38,16 +38,16 @@ md: pre
 	@find *-* -name '*.md' | xargs cat > $(OUTPUT_MD)
 	@python preprocess.py $(OUTPUT_MD)
 
-pdf: md
+pdf: md ## use pandoc to generate LaTeX & PDF file
 	$(PANDOC_EXEC) $(OUTPUT_MD) $(PANDOC_ARGS) $(PANDOC_PDF_ARGS) -o $(OUTPUT_PDF)
 
-html: md
+html: md ## use pandoc to generate LaTeX & HTML file
 	$(PANDOC_EXEC) $(OUTPUT_MD) $(PANDOC_ARGS) $(PANDOC_HTML_ARGS) -o $(OUTPUT_HTML)
 
-epub: md
+epub: md ## use pandoc to generate LaTeX & epub file
 	$(PANDOC_EXEC) $(PANDOC_ARGS) $(PANDOC_EPUB_ARGS) $(OUTPUT_MD) -t epub3 -o $(OUTPUT_EPUB)
 
-latex: md
+latex: md ## use pandoc to generate LaTeX file
 	@$(PANDOC_EXEC) $(OUTPUT_MD) $(PANDOC_ARGS) -o $(OUTPUT_TEX)
 
 slices: pdf
@@ -58,5 +58,12 @@ slices: pdf
 	@# investing
 	pdftk $(OUTPUT_PDF) cat 18 output $(OUTPUT_NAME)_preview_p18.pdf
 
-clean:
-	rm -rf $(OUTPUT_MD) $(OUTPUT_PDF) $(TMP_DIR)
+clean: ## remove generated and tmp files
+	rm -rf $(OUTPUT_MD) $(OUTPUT_PDF) $(OUTPUT_EPUB) $(OUTPUT_HTML) $(TMP_DIR)
+
+help: ## displays the description of each target (Default)
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+.DEFAULT_GOAL := help
+.PHONY: help clean slices latex epub html pdf md pre all
+
