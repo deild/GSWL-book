@@ -68,4 +68,3 @@ help: ## displays the description of each target (Default)
 
 .DEFAULT_GOAL := help
 .PHONY: help clean slices latex epub html pdf md pre all
-
