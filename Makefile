@@ -13,14 +13,14 @@ PANDOC_LATEX_ARGS=-V geometry:"top=2cm, bottom=1.5cm, left=1cm, right=1cm" -V li
 PANDOC_SYNTAX_HIGHLIGHT=--highlight-style=zenburn # --no-highlight
 # Use ":=" instead of "=" to only execute once
 GITSHA:=$(shell git rev-parse --short HEAD)
-TODAY:=$(shell date "+%B %d, %Y")
+TODAY:=$(shell date "+%d %B %Y")
 TMP_DIR=./tmp
 TMP_BEFORE_TEX=$(TMP_DIR)/before.tex
 TMP_EPUB_TITLE=$(TMP_DIR)/epub_title.txt
 TMP_HTML_HEADER=$(TMP_DIR)/html_header.html
 PANDOC_ARGS= --number-sections $(PANDOC_LATEX_ARGS) --toc $(PANDOC_SYNTAX_HIGHLIGHT) -V gitsha=$(GITSHA) #-V title="Getting Started With Ledger"
 PANDOC_PDF_ARGS= --include-before $(TMP_BEFORE_TEX)
-PANDOC_HTML_ARGS= --include-before $(TMP_HTML_HEADER) --metadata "title=Getting Started With Ledger - $(TODAY) $(GITSHA)" --standalone --css pandoc.css
+PANDOC_HTML_ARGS= --include-before $(TMP_HTML_HEADER) --metadata "title=Prise en main de Ledger - $(TODAY) $(GITSHA)" --standalone --css pandoc.css
 PANDOC_EPUB_ARGS= $(TMP_EPUB_TITLE)
 
 all: pdf epub slices html ## launch all generation target
@@ -30,9 +30,11 @@ pre: before.tex epub_title.txt html_header.html
 	cp before.tex $(TMP_BEFORE_TEX)
 	sed -i -e 's/\$$GITSHA\$$/$(GITSHA)/g' $(TMP_BEFORE_TEX)
 	cp epub_title.txt $(TMP_EPUB_TITLE)
-	sed -i -e 's/\$$TODAY\$$/$(TODAY)/g' -e 's/\$$GITSHA\$$/$(GITSHA)/g' $(TMP_EPUB_TITLE)
+	sed -i -e 's/\$$TODAY\$$/$(TODAY)/g' $(TMP_EPUB_TITLE)
+	sed -i -e 's/\$$GITSHA\$$/$(GITSHA)/g' $(TMP_EPUB_TITLE)
 	cp html_header.html $(TMP_HTML_HEADER)
-	sed -i -e 's/\$$TODAY\$$/$(TODAY)/g' -e 's/\$$GITSHA\$$/$(GITSHA)/g' $(TMP_HTML_HEADER)
+	sed -i -e 's/\$$TODAY\$$/$(TODAY)/g' $(TMP_HTML_HEADER)
+	sed -i -e 's/\$$GITSHA\$$/$(GITSHA)/g' $(TMP_HTML_HEADER)
 
 md: pre
 	@find *-* -name '*.md' | xargs cat > $(OUTPUT_MD)
