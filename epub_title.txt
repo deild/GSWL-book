@@ -1,7 +1,7 @@
 ---
-  title: Getting Started With Ledger
-  author: Rolf Schröder & Contributors
+  title: Prise en main de Ledger
+  author: Rolf Schröder & Contributeurs
   rights: Copyright (c) 2015 Rolf Schröder (MIT License)
   version: $TODAY$ $GITSHA$
-  language: en-US
+  language: fr-FR
 ---
