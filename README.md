@@ -1,27 +1,27 @@
-# Getting Started With Ledger - The Book
+# Prise en main de Ledger - Le Livre
 
-*Getting Started With Ledger* is an introductory book for the excellent command line accounting tool [Ledger](http://ledger-cli.org/).
+* *Prise en main de Ledger* est un livre d'introduction à l'excellent outil de comptabilité en ligne de commande [Ledger](https://ledger-cli.org/)
 
-The book covers:
+Les couvertures du livre : 
 
-* The basics of (double entry) accounting.
-* Installing & running basic Ledger.
-* Setting up a fully automatic environment for production use.
-* Integrating external data (CSV from banks etc.) into the journal.
-* Generating the usual reports about one's financial situation automatically.
-* Advanced topics like automated transactions (briefly).
+* Les bases de la comptabilité (en partie double).
+* Installation et exécution du Ledger de base.
+* Mise en place d'un environnement entièrement automatique pour l'utilisation en production.
+* Intégration de données externes (CSV des banques, etc.) dans le journal.
+* Générer automatiquement les rapports habituels sur sa situation financière.
+* Sujets avancés comme les transactions automatisées (brièvement).
 
-## Get the book
+## Obtenir le livre
+ 
+Allez à la page [Releases](https://github.com/deild/GSWL-book/releases) et téléchargez le fichier PDF.
 
-Go the the [Releases](https://github.com/rolfschr/GSWL-book/releases) page and download the PDF file.
+Vous pouvez également consulter la dernière version sur[GitHub](https://rolfschr.github.io/gswl-book/latest.html).
 
-You can also browse the latest version on [GitHub](https://rolfschr.github.io/gswl-book/latest.html).
-
-## Get the latest version
+## Télécharger la dernière version  
 
 ```bash
 $ mkdir -p ~/src && cd ~/src
-$ git clone https://github.com/rolfschr/GSWL-book.git
+$ git clone https://github.com/deild/GSWL-book.git
 $ cd GSWL-book
 $ make pdf # use pandoc to generate LaTeX & PDF file
 ```
