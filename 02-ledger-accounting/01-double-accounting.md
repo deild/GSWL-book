@@ -1,50 +1,50 @@
 
-# An introduction to Ledger #
+# Une introduction à Ledger #
 
-This chapter introduces the philosophy of double-entry accounting, Ledger as a command line tool  and its basic usage.
+Ce chapitre présente la philosophie de la comptabilité en partie double, Ledger comme outil en ligne de commande et son utilisation de base.
 
 
-## Double-entry Accounting ##
+## Comptabilité en partie double ##
 
-Double-entry accounting is a standard bookkeeping approach.
-In accounting, every type of expense or income and every "place" which holds monetary value is called an "account" (think "category").
-Example accounts may be "Groceries", "Bike", "Holidays", "Checking Account of Bank X", "Salary" or "Mortgage".
-In double-entry accounting, one tracks the flow of money from one account to another.
-An amount of money always figures twice ("double") in the books: At the place where it came from and at the place where it was moved to.
-That is, adding $1000 *here* means removing $1000 from *there* at the same time.
-In consequence, *the total balance of all accounts is always zero.*
-Money is never added to an account without stating where the exact same amount came from.
-However, more than two accounts may be involved in one transaction.
+La comptabilité en partie double est une approche comptable standard.
+En comptabilité, chaque type de dépenses ou de revenus et chaque "emplacement" qui détient une valeur monétaire est appelé un "compte" (pensez "catégorie").
+Des exemples de comptes peuvent être "Epicerie", "Vélo", "Vacances", "Compte chèque de la Banque X", "Salaire" ou "Hypothèque".
+Dans la comptabilité en partie double, on suit le flux d'argent d'un compte à l'autre.
+Un montant d'argent figure toujours deux fois ("double") dans les registres : A l'endroit d'où il vient et à l'endroit où il a été déplacé.
+C'est-à-dire, ajouter 1000€ *ici* signifie retirer 1000€ de *là* en même temps.
+En conséquence, *le solde total de tous les comptes est toujours nul*.
+L'argent n'est jamais ajouté à un compte sans indiquer d'où vient exactement le même montant.
+Toutefois, plus de deux comptes peuvent être impliqués dans une même transaction.
 
-For example, buying a book online for $15 moves money from the account "Creditcard X" to the account "Books".
-Receiving a $2000 salary from your boss means moving $2000 from the account "Salary" to the account "Bank" (or whatever).
-Buying groceries and detergent at the supermarket may move money from "Creditcard X" to both "Groceries" and "Household".
+Par exemple, l'achat d'un livre en ligne pour 15€ déplace l'argent du compte "Carte de crédit X" vers le compte "Livres".
+Recevoir un salaire de 2000€ de votre patron signifie transférer 2000€ du compte "Salaire" au compte "Banque" (ou autre).
+L'achat de produits d'épicerie et de détergents au supermarché peut faire passer de l'argent de la "Carte de crédit X" à l'"Épicerie" et au "Ménage".
 
-In general, account names depend on the situation.
-But, one usually has the following main accounts:
+En général, les noms de compte dépendent de la situation.
+Mais, on a habituellement les comptes principaux suivants :
 
-* Expenses
-* Income
-* Assets
-* Liabilities
-* Receivables
-* Equity
+* Dépenses
+* Revenus
+* Actifs
+* Passifs
+* Créances
+* Fonds propres
 
-The level of detail needed for the subcategories ("Expenses" -> "Groceries" -> "Fruits" -> "Bananas") is up to the requirements.
+Le niveau de détail requis pour les sous-catégories ("Dépenses" -> "Epicerie" -> "Fruits" -> "Bananes") est à la hauteur des exigences.
 
 ## Ledger ##
 
-[Ledger](http://ledger-cli.org) is a double-entry accounting command line tool created by [John Wiegley](http://newartisans.com/) with a community of active contributors.
-It is an extremely potent tool and it takes some time and effort to be able to unleash its power.
-However, once mastered there is not much you may miss while doing personal or professional accounting.
+[Ledger](https://www.ledger-cli.org) est un outil en ligne de commande de comptabilité en partie double créé par [John Wiegley](http://newartisans.com/) avec une communauté de collaborateurs actifs.
+C'est un outil extrêmement puissant et il faut du temps et des efforts pour être en mesure de libérer sa puissance.
+Cependant, une fois maîtrisé, il n'y a pas grand-chose qui peut vous manquer lorsque vous faites de la comptabilité personnelle ou professionnelle.
 
-Extensive documentation can be found at [http://ledger-cli.org](http://ledger-cli.org).
+Une documentation détaillée est disponible à l'adresse suivante [http\://ledger-cli.org](https://www.ledger-cli.org).
 
-Working with Ledger boils down to two distinct types of action: Updating the list of transactions (the "journal") and using Ledger to view/interpret that data.
+L'utilisation de Ledger se résume à deux types d'action distincts : Mise à jour de la liste des transactions (le "journal") et utilisation de Ledger pour visualiser/interpréter ces données.
 
-Ledger follows good old Unix traditions and stores data in plain text files.
-This data mainly includes the journal with the transactions and some meta information, too.
-A typical transaction in Ledger looks like this:
+Ledger suit les bonnes vieilles traditions Unix et stocke les données dans des fichiers texte en clair.
+Ces données comprennent principalement le journal avec les transactions et quelques méta-informations.
+Une transaction typique dans Ledger ressemble à ceci :
 
 ~~~{.scheme}
 2042/02/21 Shopping
@@ -52,11 +52,11 @@ A typical transaction in Ledger looks like this:
 	Assets:Checking                        -$42.00
 ~~~
 
-Any transaction starts with a header line containing the date and some meta information (in the case above only a comment describing the transaction).
-The header is then followed by a list of accounts involved in the transaction (one "posting" per line; each line starting with a whitespace).
-Accounts have arbitrary names but Ledger uses the colon to distinguish between subcategories.
-The account name is followed by at least two whitespaces and the amount of money which was added (positive) or removed (negative) from that same account.
-Actually, Ledger is clever enough to calculate the appropriate amount so it would have been perfectly valid to only write:
+Toute transaction commence par une ligne d'en-tête contenant la date et quelques méta-informations (dans le cas ci-dessus seulement un commentaire décrivant la transaction).
+L'en-tête est suivi d'une liste des comptes impliqués dans la transaction (un "enregistrement" par ligne, chaque ligne commençant par un espace blanc).
+Les comptes ont des noms arbitraires, mais Ledger utilise les deux points pour distinguer les sous-catégories.
+Le nom du compte est suivi d'au moins deux espaces blancs et du montant d'argent qui a été ajouté (positif) ou supprimé (négatif) de ce même compte.
+En fait, Ledger est assez intelligent pour calculer le montant approprié aussi il aurait été parfaitement valide de n'écrire que :
 
 ~~~{.scheme}
 2042/02/21 Shopping
@@ -64,10 +64,10 @@ Actually, Ledger is clever enough to calculate the appropriate amount so it woul
     Assets:Checking
 ~~~
 
-The journal file is as simple as that and there is not much to know about it at this point. 
-Note that Ledger never modifies your files.
+Le fichier journal est aussi simple que cela et il n'y a pas grand-chose à en savoir pour le moment.
+Notez que Ledger ne modifie jamais vos fichiers.
 
-The following transactions illustrate some basic concepts used in double accounting & Ledger:
+Les transactions suivantes illustrent quelques concepts de base utilisés dans la double comptabilité et Ledger :
 
 ```{.scheme}
 ; The opening balance sets up your initial financial state.
@@ -114,21 +114,21 @@ The following transactions illustrate some basic concepts used in double account
     Expenses:Unknown                       -$42.00
 ```
 
-The above example already introduced some nice concepts from Ledger.
-Still, reading the text file is a bit boring.
-Before we let Ledger parse that for us, you'll probably still need to install it first ...
+L'exemple ci-dessus a déjà introduit quelques concepts sympathiques de Ledger.
+Cependant, la lecture du fichier texte est un peu ennuyeuse.
+Avant de laisser Ledger l'analyser pour nous, vous devrez probablement en premier lieu l'installer ...
 
-## Installing Ledger ##
+## Installation de Ledger ##
 
-Ledger's latest version can be obtained from its [website](http://ledger-cli.org/download.html).
-I recommend to have at least version 3.0.3 running.
+La dernière version de Ledger peut être obtenue sur son [site Web](https://www.ledger-cli.org/download.html).
+Je recommande d'avoir au moins la version 3.1 fonctionnelle.
 
-Further dependencies for the ecosystem presented in this book are:
+D'autres dépendances pour l'écosystème présenté dans ce livre sont :
 
 * [Git](http://git-scm.com/)
 * [Python](https://www.python.org/)
 
-Optional but recommended:
+Facultatif mais recommandé :
 
 * [gnuplot](http://www.gnuplot.info/)
 * [tig](https://github.com/jonas/tig)
@@ -137,9 +137,9 @@ Optional but recommended:
 
 ### Linux & BSD ###
 
-You'll find what you need at the [download site](http://ledger-cli.org/download.html).
+Vous trouverez ce dont vous avez besoin sur le [site de téléchargement](https://www.ledger-cli.org/download.html).
 
-When running Linux, it might just be a question of:
+Lorsque vous utilisez Linux, ce pourrait être juste une question de :
 
 ~~~{.bash}
 $ sudo apt-get install ledger
@@ -148,13 +148,14 @@ $ sudo yum install ledger
 # or ...
 ~~~
 
-However, the distribution's package might be older than the one provided at the download site.
-Ledger comes with a very good installation documentation.
-Refer to the [Github page](https://github.com/ledger/ledger) for more details.
+Cependant, le paquet de la distribution peut être plus ancien que celui fourni sur le site de téléchargement.
+Ledger est livré avec une très bonne documentation d'installation.
+Reportez-vous à la [page Github](https://github.com/ledger/ledger) pour plus de détails.
 
 ### macOS / OS X / Mac OS X ###
 
-The easiest way to install Ledger on a Mac is with [Homebrew](https://brew.sh/). Install Homebrew using its current recommended method and then install Ledger with a simple command:
+La façon la plus simple d'installer Ledger sur un Mac est avec [Homebrew](https://brew.sh/).
+Installez Homebrew en utilisant la méthode actuellement recommandée, puis installez Ledger avec une simple commande :
 
 ```{.bash}
 $ brew install ledger
@@ -162,36 +163,36 @@ $ brew install ledger
 
 ### Windows ###
 
-Ledger is hard to get running on Windows (you would probably need to compile it yourself and that's often a pain in the ass on Windows).
-Additionally, the setup presented in this book makes heavy use of the traditional Unix command line infrastructure.
-I therefore recommend to setup VirtualBox and install Ledger on a Linux machine.
-You could either use plain VirtualBox or VirtualBox with Vagrant on top.
-The latter is probably easier & faster.
-It will be totally fine to connect to your virtual machine via SSH in Windows afterwards so you won't need to actually "use" the Linux environment.
+Ledger est difficile à exécuter sous Windows (vous auriez probablement besoin de le compiler vous-même et c'est souvent un casse-pieds sous Windows).
+De plus, l'installation présentée dans ce livre fait un usage intensif de l'infrastructure traditionnelle de la ligne de commande Unix.
+Je recommande donc d'installer VirtualBox et d'installer Ledger sur une machine Linux.
+Vous pouvez utiliser VirtualBox simple ou VirtualBox avec Vagrant par dessus.
+Ce dernier est probablement plus facile et plus rapide.
+Il vous sera tout à fait possible de vous connecter à votre machine virtuelle via SSH dans Windows par la suite, vous n'aurez donc pas besoin "d'utiliser" l'environnement Linux.
 
-Step-by-step Instructions (without Vagrant):
+Instructions étape par étape (sans Vagrant) :
 
-* Download and install [VirtualBox](https://www.virtualbox.org/).
-* Download an ISO of a Linux distribution of your choice ([Ubuntu](http://www.ubuntu.com/desktop)?).
-* Install Linux on the virtual machine.
-* Install the OpenSSH *server* ("``$ sudo apt-get install openssh-server``" for Ubuntu).
-* Make sure you can [access the vm via SSH](http://stackoverflow.com/a/10532299).
-* Run the machine in [headless mode](https://www.virtualbox.org/manual/ch07.html#vboxheadless) if you want.
-* Install [babun](https://github.com/babun/babun) (built on top of [Cygwin](https://www.cygwin.com/)) on your Windows machine.
-* Connect to the vm via SSH.
-* Follow the instructions to install Ledger on Linux.
+* Télécharger et installer [VirtualBox](https://www.virtualbox.org/).
+* Téléchargez une distribution ISO d'une distribution Linux de votre choix ([Ubuntu](http://www.ubuntu.com/desktop)?).
+* Installez Linux sur la machine virtuelle.
+* Installez le serveur OpenSSH *server* ("``$ sudo apt-get install openssh-server``" pour Ubuntu).
+* Assurez-vous que vous pouvez [accéder à la vm via SSH](http://stackoverflow.com/a/10532299).
+* Exécutez la machine en [mode headless](https://www.virtualbox.org/manual/ch07.html#vboxheadless) si vous le souhaitez.
+* Installez [babun](https://github.com/babun/babun) (construit sur [Cygwin](https://www.cygwin.com/)) sur votre machine Windows.
+* Connectez-vous à la vm via SSH.
+* Suivez les instructions pour installer Ledger sous Linux.
 
-Step-by-step Instructions (with Vagrant):
+Instructions étape par étape (avec Vagrant) :
 
-* Download and install [VirtualBox](https://www.virtualbox.org/) & [Vagrant](https://www.vagrantup.com/).
-* Download this [Vagrantfile](https://github.com/rolfschr/GSWL-ecosystem/blob/master/contrib/Vagrantfile) from Github.
-* Open a terminal, go to the Vagrantfile's location and run ``vagrant up`` (this will setup an Ubuntu machine with Ledger installed).
-* To connect to the VM via SSH, use ``vagrant up`` followed by ``vagrant ssh`` from within the same folder.
+* Télécharger et installer [VirtualBox](https://www.virtualbox.org/) & [Vagrant](https://www.vagrantup.com/).
+* Téléchargez ce [Vagrantfile](https://github.com/rolfschr/GSWL-ecosystem/blob/master/contrib/Vagrantfile) depuis Github.
+* Ouvrez un terminal, allez à l'emplacement du Vagrantfile et lancez ``vagrant up`` (ceci configurera une machine Ubuntu avec Ledger installé).
+* Pour se connecter à la VM via SSH, utilisez ``vagrant up`` suivi de ``vagrant ssh`` depuis le même dossier.
 
-## A first teaser ##
+## Un premier avant-goût ##
 
-With a working installation of Ledger on your machine, grab these [sample transactions](https://gist.github.com/rolfschr/318f1f91f8f845864568) from Github (click the 'Raw' button) and copy them to a text file called ``journal.txt``.
-Then run this:
+Avec une installation fonctionnelle de Ledger sur votre machine, récupérez ces [exemples de transactions](https://gist.github.com/rolfschr/318f1f91f8f845864568) depuis Github (cliquez sur le bouton 'Raw') et copiez-les dans un fichier texte appelé ``journal.txt``.
+Alors, lancez ceci :
 
 ~~~{.bash}
 $ # Usage: ledger -f <journal-file> [...]
@@ -205,8 +206,8 @@ $ ledger -f journal.txt register
 $ ledger -f journal.txt
 ~~~
 
-This should give you a first feeling for Ledger.
-You will get to see more in the Reports chapter later.
-But first, we need to get our own Ledger ecosystem set up.
+Cela devrait vous donner une première impression sur Ledger.
+Vous en verrez plus dans le chapitre Rapports plus loin.
+Mais d'abord, nous devons mettre en place notre propre écosystème Ledger.
 
 \newpage
