@@ -6,7 +6,7 @@ OUTPUT_HTML=$(OUTPUT_NAME).html
 OUTPUT_TEX=$(OUTPUT_NAME).tex
 OUTPUT_EPUB=$(OUTPUT_NAME).epub
 PANDOC_EXEC=pandoc # run >= 1.15
-PANDOC_LATEX_ARGS=-V geometry:"top=2cm, bottom=1.5cm, left=1cm, right=1cm" -V linkcolor=blue -V urlcolor=blue
+PANDOC_LATEX_ARGS=-V lang=fr -V geometry:"top=2cm, bottom=1.5cm, left=1cm, right=1cm" -V linkcolor=blue -V urlcolor=blue
 # pandoc highlight style
 # Options are `pygments` (the default), `kate`, `monochrome`, `espresso`, `zenburn`, `haddock`, and `tango`.
 # zenburn, espresso, haddock
