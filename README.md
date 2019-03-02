@@ -1,6 +1,6 @@
 # Prise en main de Ledger - Le Livre
 
-* *Prise en main de Ledger* est un livre d'introduction à l'excellent outil de comptabilité en ligne de commande [Ledger](https://ledger-cli.org/)
+*Prise en main de Ledger* est un livre d'introduction à l'excellent outil de comptabilité en ligne de commande [Ledger](https://ledger-cli.org/)
 
 Les couvertures du livre : 
 
