@@ -69,7 +69,7 @@ Notez que Ledger ne modifie jamais vos fichiers.
 
 Les transactions suivantes illustrent quelques concepts de base utilisés dans la double comptabilité et Ledger :
 
-```{.scheme}
+~~~{.scheme}
 ; The opening balance sets up your initial financial state.
 ; This is needed as one rarely starts with no money at all.
 ; Your opening balance is the first "transaction" in your journal.
@@ -112,7 +112,7 @@ Les transactions suivantes illustrent quelques concepts de base utilisés dans l
 2042/02/22 * Shopping
     Expenses:Food:Groceries
     Expenses:Unknown                       -$42.00
-```
+~~~
 
 L'exemple ci-dessus a déjà introduit quelques concepts sympathiques de Ledger.
 Cependant, la lecture du fichier texte est un peu ennuyeuse.
