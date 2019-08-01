@@ -61,7 +61,7 @@ slices: pdf
 	pdftk $(OUTPUT_PDF) cat 18 output $(OUTPUT_NAME)_preview_p18.pdf
 
 clean: ## remove generated and tmp files
-	rm -rf $(OUTPUT_MD) $(OUTPUT_PDF) $(OUTPUT_EPUB) $(OUTPUT_HTML) $(TMP_DIR)
+	rm -rf $(OUTPUT_MD) $(OUTPUT_PDF) $(TMP_DIR) $(OUTPUT_HTML) $(OUTPUT_EPUB)
 
 help: ## displays the description of each target (Default)
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
