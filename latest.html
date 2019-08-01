@@ -1,0 +1,1053 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Prise en main de Ledger - 01 August 2019 07516ad</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #303030; color: #cccccc; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
+td.sourceCode { padding-left: 5px; }
+pre, code { color: #cccccc; background-color: #303030; }
+code > span.kw { color: #f0dfaf; } /* Keyword */
+code > span.dt { color: #dfdfbf; } /* DataType */
+code > span.dv { color: #dcdccc; } /* DecVal */
+code > span.bn { color: #dca3a3; } /* BaseN */
+code > span.fl { color: #c0bed1; } /* Float */
+code > span.ch { color: #dca3a3; } /* Char */
+code > span.st { color: #cc9393; } /* String */
+code > span.co { color: #7f9f7f; } /* Comment */
+code > span.ot { color: #efef8f; } /* Other */
+code > span.al { color: #ffcfaf; } /* Alert */
+code > span.fu { color: #efef8f; } /* Function */
+code > span.er { color: #c3bf9f; } /* Error */
+code > span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+code > span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code > span.sc { color: #dca3a3; } /* SpecialChar */
+code > span.vs { color: #cc9393; } /* VerbatimString */
+code > span.ss { color: #cc9393; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { } /* Variable */
+code > span.cf { color: #f0dfaf; } /* ControlFlow */
+code > span.op { color: #f0efd0; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code > span.at { } /* Attribute */
+code > span.do { color: #7f9f7f; } /* Documentation */
+code > span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code > span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+  </style>
+  <link rel="stylesheet" href="pandoc.css" type="text/css" />
+</head>
+<body>
+<h1>Prise en main de Ledger</h1>
+<p>
+01 August 2019<br>
+07516ad
+</p>
+<p>
+Rolf Schröder & Contributeurs
+</p>
+<div id="header">
+<h1 class="title">Prise en main de Ledger - 01 August 2019 07516ad</h1>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#suppositions-promesses">Suppositions &amp; Promesses</a></li>
+<li><a href="#une-introduction-à-ledger"><span class="toc-section-number">1</span> Une introduction à Ledger</a><ul>
+<li><a href="#comptabilité-en-partie-double"><span class="toc-section-number">1.1</span> Comptabilité en partie double</a></li>
+<li><a href="#ledger"><span class="toc-section-number">1.2</span> Ledger</a></li>
+<li><a href="#installation-de-ledger"><span class="toc-section-number">1.3</span> Installation de Ledger</a><ul>
+<li><a href="#linux-bsd"><span class="toc-section-number">1.3.1</span> Linux &amp; BSD</a></li>
+<li><a href="#macos-os-x-mac-os-x"><span class="toc-section-number">1.3.2</span> macOS / OS X / Mac OS X</a></li>
+<li><a href="#windows"><span class="toc-section-number">1.3.3</span> Windows</a></li>
+</ul></li>
+<li><a href="#un-premier-avant-goût"><span class="toc-section-number">1.4</span> Un premier avant-goût</a></li>
+</ul></li>
+<li><a href="#linstallation"><span class="toc-section-number">2</span> L'installation</a><ul>
+<li><a href="#fichiers-communs"><span class="toc-section-number">2.1</span> Fichiers communs</a></li>
+<li><a href="#données-privées"><span class="toc-section-number">2.2</span> Données privées</a><ul>
+<li><a href="#méta-de-départ"><span class="toc-section-number">2.2.1</span> Méta de départ</a></li>
+<li><a href="#autres-fichiers"><span class="toc-section-number">2.2.2</span> Autres fichiers</a></li>
+</ul></li>
+<li><a href="#orchestrer-lécoystème-et-les-données-privées"><span class="toc-section-number">2.3</span> Orchestrer l'écoystème et les données privées</a></li>
+<li><a href="#tmux-tmuxinator"><span class="toc-section-number">2.4</span> Tmux &amp; Tmuxinator</a></li>
+<li><a href="#votre-propre-configuration"><span class="toc-section-number">2.5</span> Votre propre configuration</a></li>
+</ul></li>
+<li><a href="#rapports"><span class="toc-section-number">3</span> Rapports</a><ul>
+<li><a href="#rapports-de-solde"><span class="toc-section-number">3.1</span> Rapports de solde</a></li>
+<li><a href="#rapports-de-registre"><span class="toc-section-number">3.2</span> Rapports de registre</a></li>
+<li><a href="#filtrage-avancé-des-rapports"><span class="toc-section-number">3.3</span> Filtrage avancé des rapports</a></li>
+<li><a href="#exemples-de-questions"><span class="toc-section-number">3.4</span> Exemples de questions</a><ul>
+<li><a href="#réponses"><span class="toc-section-number">3.4.1</span> Réponses</a></li>
+</ul></li>
+<li><a href="#Recurring_Reports"><span class="toc-section-number">3.5</span> Rapports récurrents</a></li>
+<li><a href="#autres-rapports"><span class="toc-section-number">3.6</span> Autres rapports</a></li>
+<li><a href="#visualisation"><span class="toc-section-number">3.7</span> Visualisation</a></li>
+</ul></li>
+<li><a href="#updating-the-journal"><span class="toc-section-number">4</span> Updating the journal</a><ul>
+<li><a href="#cash-transactions"><span class="toc-section-number">4.1</span> Cash transactions</a></li>
+<li><a href="#electronic-transactions"><span class="toc-section-number">4.2</span> Electronic transactions</a><ul>
+<li><a href="#the-general-work-flow-for-electronic-transactions"><span class="toc-section-number">4.2.1</span> The general work flow for electronic transactions</a></li>
+</ul></li>
+<li><a href="#putting-it-all-together-with-an-example"><span class="toc-section-number">4.3</span> Putting it all together with an example</a><ul>
+<li><a href="#update-misc.tmp.txt"><span class="toc-section-number">4.3.1</span> Update <code>misc.tmp.txt</code></a></li>
+<li><a href="#Get_data_from_Northbank"><span class="toc-section-number">4.3.2</span> Get data from NorthBank</a></li>
+<li><a href="#get-data-from-southbank"><span class="toc-section-number">4.3.3</span> Get data from SouthBank</a></li>
+<li><a href="#merging-everything"><span class="toc-section-number">4.3.4</span> Merging everything</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#Advanced"><span class="toc-section-number">5</span> Advanced</a><ul>
+<li><a href="#formatting"><span class="toc-section-number">5.1</span> Formatting</a></li>
+<li><a href="#virtual-postings"><span class="toc-section-number">5.2</span> Virtual postings</a></li>
+<li><a href="#Automated_Transactions"><span class="toc-section-number">5.3</span> Automated Transactions</a></li>
+<li><a href="#resetting-a-balance"><span class="toc-section-number">5.4</span> Resetting a balance</a></li>
+</ul></li>
+<li><a href="#investing-with-ledger"><span class="toc-section-number">6</span> Investing with Ledger</a><ul>
+<li><a href="#dealing-with-commodities-market-values"><span class="toc-section-number">6.1</span> Dealing with commodities &amp; market values</a></li>
+<li><a href="#reporting-gain-loss"><span class="toc-section-number">6.2</span> Reporting gain &amp; loss</a></li>
+<li><a href="#asset-allocation"><span class="toc-section-number">6.3</span> Asset Allocation</a></li>
+</ul></li>
+<li><a href="#la-fin"><span class="toc-section-number">7</span> La fin</a><ul>
+<li><a href="#contributions"><span class="toc-section-number">7.1</span> Contributions</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h2 id="suppositions-promesses" class="unnumbered">Suppositions &amp; Promesses</h2>
+<p>Ce livre est écrit pour les nouveaux utilisateurs de Ledger (surprise !). Ledger est un outil en ligne de commande et je m'attends donc à ce que le lecteur soit familier avec la ligne de commande en général. Vous devez savoir ce qu'est un terminal, comment exécuter des commandes quelconques ou installer un nouveau logiciel via la ligne de commande.</p>
+<p>Vous n'avez pas besoin de savoir comment programmer mais ça aide probablement si vous avez déjà lu du code.</p>
+<p>Le livre se veut concis. Cela implique une certaine expérience technique et une attitude de bricoleur de la part du lecteur.</p>
+<p>D'autre part, vous disposerez d'un environnement de travail prêt à l'emploi pour commencer à utiliser Ledger. Les détails techniques ne sont pas cachés et le code est distribué gratuitement. Vous pouvez modifier tous les aspects du flux de travail et du code présentés dans le livre.</p>
+<p>Vous serez peut-être surpris de voir à quel point le livre est court. Cela est dû au principe de ne pas se répéter, qui a été suivi dans ce livre : Rien de ce qui peut être vu avec un minimum d'effort en code n'est répété dans le livre. Vous obtiendrez toujours une indication sur l'endroit où obtenir l'information. Cela simplifie la vie de l'auteur, rend le livre moins sujet aux erreurs et donne au lecteur de nombreuses occasions de comprendre ce qui se passe derrière le rideau.</p>
+
+<h1 id="une-introduction-à-ledger"><span class="header-section-number">1</span> Une introduction à Ledger</h1>
+<p>Ce chapitre présente la philosophie de la comptabilité en partie double, Ledger comme outil en ligne de commande et son utilisation de base.</p>
+<h2 id="comptabilité-en-partie-double"><span class="header-section-number">1.1</span> Comptabilité en partie double</h2>
+<p>La comptabilité en partie double est une approche comptable standard. En comptabilité, chaque type de dépenses ou de revenus et chaque &quot;emplacement&quot; qui détient une valeur monétaire est appelé un &quot;compte&quot; (pensez &quot;catégorie&quot;). Des exemples de comptes peuvent être &quot;Epicerie&quot;, &quot;Vélo&quot;, &quot;Vacances&quot;, &quot;Compte chèque de la Banque X&quot;, &quot;Salaire&quot; ou &quot;Hypothèque&quot;. Dans la comptabilité en partie double, on suit le flux d'argent d'un compte à l'autre. Un montant d'argent figure toujours deux fois (&quot;double&quot;) dans les registres : A l'endroit d'où il vient et à l'endroit où il a été déplacé. C'est-à-dire, ajouter 1000€ <em>ici</em> signifie retirer 1000€ de <em>là</em> en même temps. En conséquence, <em>le solde total de tous les comptes est toujours nul</em>. L'argent n'est jamais ajouté à un compte sans indiquer d'où vient exactement le même montant. Toutefois, plus de deux comptes peuvent être impliqués dans une même transaction.</p>
+<p>Par exemple, l'achat d'un livre en ligne pour 15€ déplace l'argent du compte &quot;Carte de crédit X&quot; vers le compte &quot;Livres&quot;. Recevoir un salaire de 2000€ de votre patron signifie transférer 2000€ du compte &quot;Salaire&quot; au compte &quot;Banque&quot; (ou autre). L'achat de produits d'épicerie et de détergents au supermarché peut faire passer de l'argent de la &quot;Carte de crédit X&quot; à l'&quot;Épicerie&quot; et au &quot;Ménage&quot;.</p>
+<p>En général, les noms de compte dépendent de la situation. Mais, on a habituellement les comptes principaux suivants :</p>
+<ul>
+<li>Dépenses</li>
+<li>Revenus</li>
+<li>Actifs</li>
+<li>Passifs</li>
+<li>Créances</li>
+<li>Fonds propres</li>
+</ul>
+<p>Le niveau de détail requis pour les sous-catégories (&quot;Dépenses&quot; -&gt; &quot;Epicerie&quot; -&gt; &quot;Fruits&quot; -&gt; &quot;Bananes&quot;) est à la hauteur des exigences.</p>
+<h2 id="ledger"><span class="header-section-number">1.2</span> Ledger</h2>
+<p><a href="https://www.ledger-cli.org">Ledger</a> est un outil en ligne de commande de comptabilité en partie double créé par <a href="http://newartisans.com/">John Wiegley</a> avec une communauté de collaborateurs actifs. C'est un outil extrêmement puissant et il faut du temps et des efforts pour être en mesure de libérer sa puissance. Cependant, une fois maîtrisé, il n'y a pas grand-chose qui peut vous manquer lorsque vous faites de la comptabilité personnelle ou professionnelle.</p>
+<p>Une documentation détaillée est disponible à l'adresse suivante <a href="https://www.ledger-cli.org">http://ledger-cli.org</a>.</p>
+<p>L'utilisation de Ledger se résume à deux types d'action distincts : Mise à jour de la liste des transactions (le &quot;journal&quot;) et utilisation de Ledger pour visualiser/interpréter ces données.</p>
+<p>Ledger suit les bonnes vieilles traditions Unix et stocke les données dans des fichiers texte en clair. Ces données comprennent principalement le journal avec les transactions et quelques méta-informations. Une transaction typique dans Ledger ressemble à ceci :</p>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="dv">2042</span>/<span class="dv">02</span>/<span class="dv">21</span> Shopping
+    Expenses:Food:Groceries                 $<span class="fl">42.00</span>
+    Assets:Checking                        -$<span class="fl">42.00</span></code></pre></div>
+<p>Toute transaction commence par une ligne d'en-tête contenant la date et quelques méta-informations (dans le cas ci-dessus seulement un commentaire décrivant la transaction). L'en-tête est suivi d'une liste des comptes impliqués dans la transaction (un &quot;enregistrement&quot; par ligne, chaque ligne commençant par un espace blanc). Les comptes ont des noms arbitraires, mais Ledger utilise les deux points pour distinguer les sous-catégories. Le nom du compte est suivi d'au moins deux espaces blancs et du montant d'argent qui a été ajouté (positif) ou supprimé (négatif) de ce même compte. En fait, Ledger est assez intelligent pour calculer le montant approprié aussi il aurait été parfaitement valide de n'écrire que :</p>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="dv">2042</span>/<span class="dv">02</span>/<span class="dv">21</span> Shopping
+    Expenses:Food:Groceries                 $<span class="fl">42.00</span>
+    Assets:Checking</code></pre></div>
+<p>Le fichier journal est aussi simple que cela et il n'y a pas grand-chose à en savoir pour le moment. Notez que Ledger ne modifie jamais vos fichiers.</p>
+<p>Les transactions suivantes illustrent quelques concepts de base utilisés dans la double comptabilité et Ledger :</p>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="co">; The opening balance sets up your initial financial state.</span>
+<span class="co">; This is needed as one rarely starts with no money at all.</span>
+<span class="co">; Your opening balance is the first &quot;transaction&quot; in your journal.</span>
+<span class="co">; The account name is not special. We only need something convenient here.</span>
+<span class="dv">2041</span>/<span class="dv">12</span>/<span class="dv">31</span> * Opening Balance
+    Assets:Checking                       $<span class="fl">1000.00</span>
+    Equity:OpeningBalances
+
+<span class="co">; The money comes from the employer and goes into the bank account.</span>
+<span class="dv">2041</span>/<span class="dv">01</span>/<span class="dv">31</span> * Salary
+    Income:Salary                           -$<span class="dv">1337</span>
+    Assets:Checking                          $<span class="dv">1337</span>
+
+<span class="co">; Groceries were paid using the bank account&#39;s electronic cash card</span>
+<span class="co">; so the money comes directly from the bank account.</span>
+<span class="dv">2042</span>/<span class="dv">02</span>/<span class="dv">15</span> * Shopping
+    Expenses:Food:Groceries                 $<span class="fl">42.00</span>
+    Assets:Checking
+
+<span class="co">; Although we know the cash sits in the wallet, everything in cash is</span>
+<span class="co">; considered as &quot;lost&quot; until recovered (see next transaction and later chapters).</span>
+<span class="dv">2042</span>/<span class="dv">02</span>/<span class="dv">15</span> * ATM withdrawal
+    Expenses:Unknown                       $<span class="fl">150.00</span>
+    Assets:Checking
+
+<span class="co">; Paying food with cash: Moving money from the Expenses:Unknown</span>
+<span class="co">; account to the food account.</span>
+<span class="dv">2042</span>/<span class="dv">02</span>/<span class="dv">15</span> * Shopping
+    Expenses:Food:Groceries                 $<span class="fl">23.00</span>
+    Expenses:Unknown
+
+<span class="co">; Ledger automatically reduces &#39;Expenses:Unknown&#39; by $69.</span>
+<span class="dv">2042</span>/<span class="dv">02</span>/<span class="dv">22</span> * Shopping
+    Expenses:Food:Groceries                 $<span class="fl">23.00</span>
+    Expenses:Clothing                       $<span class="fl">46.00</span>
+    Expenses:Unknown
+
+<span class="co">; You can use positive (add money to an account) or negative</span>
+<span class="co">; (remove money from an account) amounts interchangeably.</span>
+<span class="dv">2042</span>/<span class="dv">02</span>/<span class="dv">22</span> * Shopping
+    Expenses:Food:Groceries
+    Expenses:Unknown                       -$<span class="fl">42.00</span></code></pre></div>
+<p>L'exemple ci-dessus a déjà introduit quelques concepts sympathiques de Ledger. Cependant, la lecture du fichier texte est un peu ennuyeuse. Avant de laisser Ledger l'analyser pour nous, vous devrez probablement en premier lieu l'installer ...</p>
+<h2 id="installation-de-ledger"><span class="header-section-number">1.3</span> Installation de Ledger</h2>
+<p>La dernière version de Ledger peut être obtenue sur son <a href="https://www.ledger-cli.org/download.html">site Web</a>. Je recommande d'avoir au moins la version 3.1 fonctionnelle.</p>
+<p>D'autres dépendances pour l'écosystème présenté dans ce livre sont :</p>
+<ul>
+<li><a href="http://git-scm.com/">Git</a></li>
+<li><a href="https://www.python.org/">Python</a></li>
+</ul>
+<p>Facultatif mais recommandé :</p>
+<ul>
+<li><a href="http://www.gnuplot.info/">gnuplot</a></li>
+<li><a href="https://github.com/jonas/tig">tig</a></li>
+<li><a href="http://tmux.sourceforge.net/">tmux</a></li>
+<li><a href="https://github.com/tmuxinator/tmuxinator">tmuxinator</a></li>
+</ul>
+<h3 id="linux-bsd"><span class="header-section-number">1.3.1</span> Linux &amp; BSD</h3>
+<p>Vous trouverez ce dont vous avez besoin sur le <a href="https://www.ledger-cli.org/download.html">site de téléchargement</a>.</p>
+<p>Lorsque vous utilisez Linux, ce pourrait être juste une question de :</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">sudo</span> apt-get install ledger
+<span class="co"># or</span>
+$ <span class="kw">sudo</span> yum install ledger
+<span class="co"># or ...</span></code></pre></div>
+<p>Cependant, le paquet de la distribution peut être plus ancien que celui fourni sur le site de téléchargement. Ledger est livré avec une très bonne documentation d'installation. Reportez-vous à la <a href="https://github.com/ledger/ledger">page Github</a> pour plus de détails.</p>
+<h3 id="macos-os-x-mac-os-x"><span class="header-section-number">1.3.2</span> macOS / OS X / Mac OS X</h3>
+<p>La façon la plus simple d'installer Ledger sur un Mac est avec <a href="https://brew.sh/">Homebrew</a>. Installez Homebrew en utilisant la méthode actuellement recommandée, puis installez Ledger avec une simple commande :</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">brew</span> install ledger</code></pre></div>
+<h3 id="windows"><span class="header-section-number">1.3.3</span> Windows</h3>
+<p>Ledger est difficile à exécuter sous Windows (vous auriez probablement besoin de le compiler vous-même et c'est souvent un casse-pieds sous Windows). De plus, l'installation présentée dans ce livre fait un usage intensif de l'infrastructure traditionnelle de la ligne de commande Unix. Je recommande donc d'installer VirtualBox et d'installer Ledger sur une machine Linux. Vous pouvez utiliser VirtualBox simple ou VirtualBox avec Vagrant par dessus. Ce dernier est probablement plus facile et plus rapide. Il vous sera tout à fait possible de vous connecter à votre machine virtuelle via SSH dans Windows par la suite, vous n'aurez donc pas besoin &quot;d'utiliser&quot; l'environnement Linux.</p>
+<p>Instructions étape par étape (sans Vagrant) :</p>
+<ul>
+<li>Télécharger et installer <a href="https://www.virtualbox.org/">VirtualBox</a>.</li>
+<li>Téléchargez une distribution ISO d'une distribution Linux de votre choix (<a href="http://www.ubuntu.com/desktop">Ubuntu</a>?).</li>
+<li>Installez Linux sur la machine virtuelle.</li>
+<li>Installez le serveur OpenSSH <em>server</em> (&quot;<code>$ sudo apt-get install openssh-server</code>&quot; pour Ubuntu).</li>
+<li>Assurez-vous que vous pouvez <a href="http://stackoverflow.com/a/10532299">accéder à la vm via SSH</a>.</li>
+<li>Exécutez la machine en <a href="https://www.virtualbox.org/manual/ch07.html#vboxheadless">mode headless</a> si vous le souhaitez.</li>
+<li>Installez <a href="https://github.com/babun/babun">babun</a> (construit sur <a href="https://www.cygwin.com/">Cygwin</a>) sur votre machine Windows.</li>
+<li>Connectez-vous à la vm via SSH.</li>
+<li>Suivez les instructions pour installer Ledger sous Linux.</li>
+</ul>
+<p>Instructions étape par étape (avec Vagrant) :</p>
+<ul>
+<li>Télécharger et installer <a href="https://www.virtualbox.org/">VirtualBox</a> &amp; <a href="https://www.vagrantup.com/">Vagrant</a>.</li>
+<li>Téléchargez ce <a href="https://github.com/rolfschr/GSWL-ecosystem/blob/master/contrib/Vagrantfile">Vagrantfile</a> depuis Github.</li>
+<li>Ouvrez un terminal, allez à l'emplacement du Vagrantfile et lancez <code>vagrant up</code> (ceci configurera une machine Ubuntu avec Ledger installé).</li>
+<li>Pour se connecter à la VM via SSH, utilisez <code>vagrant up</code> suivi de <code>vagrant ssh</code> depuis le même dossier.</li>
+</ul>
+<h2 id="un-premier-avant-goût"><span class="header-section-number">1.4</span> Un premier avant-goût</h2>
+<p>Avec une installation fonctionnelle de Ledger sur votre machine, récupérez ces <a href="https://gist.github.com/rolfschr/318f1f91f8f845864568">exemples de transactions</a> depuis Github (cliquez sur le bouton 'Raw') et copiez-les dans un fichier texte appelé <code>journal.txt</code>. Alors, lancez ceci :</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="co"># Usage: ledger -f &lt;journal-file&gt; [...]</span>
+$ <span class="kw">ledger</span> -f journal.txt balance
+$ <span class="kw">ledger</span> -f journal.txt balance Groceries
+$ <span class="kw">ledger</span> -f journal.txt register
+
+<span class="co"># Start an interactive session</span>
+<span class="co"># and type &quot;balance&quot;, then  press Enter</span>
+<span class="co"># (press ctrl+d to quit)</span>
+$ <span class="kw">ledger</span> -f journal.txt</code></pre></div>
+<p>Cela devrait vous donner une première impression sur Ledger. Vous en verrez plus dans le chapitre Rapports plus loin. Mais d'abord, nous devons mettre en place notre propre écosystème Ledger.</p>
+
+<h1 id="linstallation"><span class="header-section-number">2</span> L'installation</h1>
+<p>Tout au long de ce livre, nous utiliserons une configuration de Ledger spécifique. Deux dépôts sont utilisés pour séparer le code et les données. Le dossier &quot;ecosystem&quot; (voir <a href="https://github.com/rolfschr/GSWL-ecoystem">GSWL-ecosystem</a>) contient les scripts et d'autres choses pour manipuler le journal. D'autre part, le dossier &quot;privé&quot; contiendra les données financières réelles. J'ai fourni un exemple de dossier privé (voir <a href="https://github.com/rolfschr/GSWL-private">GSWL-private</a>) que nous utiliserons comme référence.</p>
+<p>La division du code et des données permet de ne chiffrer que ce qui est nécessaire, de partager plus facilement le code commun et de permettre un contrôle de version indépendant.</p>
+<p>Le Readme de <a href="https://github.com/rolfschr/GSWL-private">GSWL-private</a> explique comment cloner les dépôts. Allez-y, allez les chercher.</p>
+<p>Regardons le contenu des dépôts :</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cd</span> ~/src
+
+$ <span class="kw">ls</span> ~/src/GSWL-ecosystem
+<span class="kw">alias</span>  convert.py reports.py
+<span class="co"># Omitting other files for now ...</span>
+
+$ <span class="kw">ls</span> ~/src/GSWL-private
+<span class="kw">alias.local</span>       csv2journal.txt  main.txt  misc.tmp.txt
+<span class="kw">bankaccounts.yml</span>  journal.txt      meta.txt  reports.txt
+<span class="co"># Omitting other files for now ...</span></code></pre></div>
+<h2 id="fichiers-communs"><span class="header-section-number">2.1</span> Fichiers communs</h2>
+<p>L'écosystème contient du code pour traiter les données actuelles de manière intelligente (automatique !). Les scripts <code>convert.py</code> et <code>report.py</code> aident à intégrer des données CSV externes ou à interpréter les données respectivement. Le fichier <code>alias</code> est un script BASH qui définit les alias et fonctions courants. Vous pouvez consulter ces fichiers maintenant, mais nous les traiterons plus tard après avoir consulté le dépôt privé.</p>
+<h2 id="données-privées"><span class="header-section-number">2.2</span> Données privées</h2>
+<p>Il y a beaucoup de dossiers dans le dépôt privé. Seuls les plus importants sont couverts pour l'instant.</p>
+<p>Rappelez-vous que Ledger s'attend à ce que le fichier journal soit fourni par <code>-f</code>. Les alias définis dans l'écosystème supposent que ce fichier s'appelle <code>main.txt</code>. Cependant, ce fichier ne contient aucune donnée transactionnelle. Le fichier ne contient qu'une liste d'instructions <code>include</code>. Cela peut ressembler à ceci :</p>
+<div class="sourceCode"><pre class="sourceCode commonlisp"><code class="sourceCode commonlisp"><span class="co">; This is the main entry file for ledger.</span>
+<span class="co">; Nothing fancy happens here. All real data is in journal.txt, configuration</span>
+<span class="co">; stuff etc. is to be found in meta.txt.</span>
+
+<span class="co">; Include the config file.</span>
+include meta.txt
+
+<span class="co">; Include the actual journal.</span>
+include journal.txt</code></pre></div>
+<p>L'utilisation d'instructions <code>include</code> est un bon moyen de séparer les choses qui ne sont pas faites l'une pour l'autre. Il vous permet également d'essayer de nouvelles configurations ou données pour Ledger sans polluer vos fichiers dont la version est contrôlée.</p>
+<p>Les transactions réelles sont toutes enregistrées dans <code>journal.txt</code>. Consultez le fichier <code>journal.txt</code> du dossier privé pour obtenir un premier aperçu d'un exemple de données.</p>
+<h3 id="méta-de-départ"><span class="header-section-number">2.2.1</span> Méta de départ</h3>
+<p>Dans cette configuration, le fichier <code>meta.txt</code> doit contenir toutes les données de configuration de Ledger et toute autre donnée non transactionnelle.</p>
+<p>Par exemple, une instruction utile dans ce fichier est <code>account</code>. Ceci vous permet de prédéfinir tous les comptes qui doivent être utilisés par Ledger. Ledger n'exige pas que vous le fassiez, mais c'est une bonne pratique de toute façon. De plus, nous utiliserons plus tard l'argument de ligne de commande <code>--pedantic</code> qui provoque une erreur dans Ledger lorsque des comptes inconnus sont utilisés. Les définitions de compte peuvent ressembler à ceci :</p>
+<div class="sourceCode"><pre class="sourceCode commonlisp"><code class="sourceCode commonlisp">account Assets:Checking
+account Expenses:Dining
+account Expenses:Groceries
+account Income:Salary</code></pre></div>
+<p>De même, <code>commodity</code> définit les devises valides en usage :</p>
+<div class="sourceCode"><pre class="sourceCode commonlisp"><code class="sourceCode commonlisp">commodity $
+commodity €
+commodity BTC</code></pre></div>
+<p>L'exemple <code>meta.txt</code> n'inclut en effet pas d'autre configuration. Ou est-ce le cas ?</p>
+<h3 id="autres-fichiers"><span class="header-section-number">2.2.2</span> Autres fichiers</h3>
+<p>Ensuite, il y a un script Bash appelé <code>alias.local</code> qui contient les configurations locales. Ce script est automatiquement source par <code>ledger-ecoystem/alias</code>. C'est peut-être le moment de jeter un coup d'oeil à ces scripts. Essayez de découvrir à quoi ressemble la commande <code>led</code>, quel est le contenu de la variable d'environnement <code>$LAST_AMN</code> et comment <code>alias.local</code> est source.</p>
+<p>Enfin, les fichiers <code>bankaccounts.yml</code>, <code>csv2journal.txt</code> et <code>misc.tmp.txt</code> sont utilisés pour mettre à jour le journal de manière automatisée. <code>reports.txt</code> liste les questions posées à plusieurs reprises sur la situation financière. Tout cela est expliqué dans les chapitres suivants, mais n'hésitez pas à les inspecter immédiatement.</p>
+<h2 id="orchestrer-lécoystème-et-les-données-privées"><span class="header-section-number">2.3</span> Orchestrer l'écoystème et les données privées</h2>
+<p>Vous devriez avoir le modèle mental suivant de la configuration présentée : La plupart du code se trouve dans le dossier ecosystem. Toutes les données actuelles se trouvent dans le dossier privé. Travailler avec Ledger signifie travailler dans le dossier privé. Pour libérer la puissance de tous les scripts etc., il est nécessaire de source <code>ecosystem/alias</code> dans le dossier privé. Ceci source <code>alias.local</code> à partir du répertoire de travail courant. Le fichier d'alias local permet d'écraser les fonctionnalités de l'écosystème ou d'ajouter de nouvelles fonctionnalités.</p>
+<p>Le fait d'avoir l'écosystème de scripts et les données d'exemples disponibles permet d'avoir une idée plus précise du travail quotidien avec Ledger. Exécutez les commandes suivantes :</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cd</span> ~/src/GSWL-private <span class="kw">&amp;&amp;</span> <span class="kw">source</span> ~/src/GSWL-ecosystem/alias <span class="co"># See GSWL-private/.bashrc for an alias!</span>
+$ <span class="kw">which</span> led
+$ <span class="kw">led</span> bal
+$ <span class="kw">led</span> reg
+$ <span class="kw">ledreports</span> <span class="co"># explained later</span></code></pre></div>
+<p>Pour être tout à fait clair : <code>led</code> n'est qu'un alias à <code>ledger</code> combiné avec quelques arguments prédéfinis (voir <code>ecosystem/alias</code>). Vous pouvez bien sûr exécuter <code>ledger</code> sur les mêmes données. Dans ce cas, vous devrez au moins indiquer à Ledger où trouver le fichier journal : <code>ledger -f main.txt</code>. Pensez à <code>led</code> comme à <code>ledger</code> avec un fichier d'entrée prédéfini et des valeurs par défaut saines.</p>
+<h2 id="tmux-tmuxinator"><span class="header-section-number">2.4</span> Tmux &amp; Tmuxinator</h2>
+<p>Je recommande fortement l'utilisation de <a href="http://tmux.sourceforge.net/">Tmux</a> pour toutes les affaires que vous faites sur la ligne de commande. Cet outil accélère tellement votre flux de travail qu'il est en fait ridicule. Il s'agit d'une meilleure version de <code>screen</code> et &quot;permet de basculer facilement entre plusieurs programmes dans un terminal, de les détacher (ils continuent à fonctionner en arrière-plan) et de les rattacher à un autre terminal&quot;. Si vous ne l'utilisez pas jusqu'à présent, vous vous demanderez comment vous avez survécu avant. L'exemple de <code>.tmux.conf</code> dans le dépôt privé et ce <a href="https://gist.github.com/MohamedAlaa/2961058">HowTo</a> vous permet de démarrer si vous en avez besoin. Jetez un coup d'oeil au fichier example <code>.tmux.conf</code> et assurez-vous de savoir au moins comment passer d'une fenêtre à l'autre, sauter entre les fenêtres, créer une nouvelle fenêtre et maximiser (redimensionner) un volet.</p>
+<p><a href="https://github.com/tmuxinator/tmuxinator">Tmuxinator</a> s'appuis sur tmux et vous permet de prédéfinir des sessions tmux pour des tâches spécifiques. J'ai défini une session tmux spécifique à utiliser avec le dossier privé. Le fichier de session tmuxinator <code>.tmuxinator.ledger.yml</code> peut être trouvé dans le dépôt privé (consultez le maintenant !).</p>
+<p>Démarrer une session tmux avec le dépôt privé (en supposant que tmux &amp; tmuxinator sont installés) :</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cp</span> ~/src/GSWL-private/.tmux.conf ~/ <span class="co"># Optional, only if you&#39;ve never used tmux</span>
+$ <span class="kw">mkdir</span> -p ~/.tmuxinator
+$ <span class="kw">ln</span> -s ~/src/GSWL-private/.tmuxinator.GSWL-private.yml ~/.tmuxinator/GSWL-private.yml
+$ <span class="kw">mux</span> start GSWL-private <span class="co"># Starts a new Tmux session</span></code></pre></div>
+<p>Dans chaque fenêtre de session Tmux, <code>ecosystem/alias</code> est source.</p>
+<p>L'exemple <code>GSLW-private/.bashrc</code> fournit quelques alias pour démarrer/arrêter les sessions Tmux. Vous devriez de toute façon trouver ce fichier dans votre <code>~/.bashrc</code>.</p>
+<p>Avec la mise en place et le fonctionnement, nous pouvons maintenant continuer à jouer avec les fonctions actuelles de Ledger.</p>
+<h2 id="votre-propre-configuration"><span class="header-section-number">2.5</span> Votre propre configuration</h2>
+<p>Pour commencer avec votre configuration personnelle, passez à la caisse (sans jeu de mots) <a href="https://github.com/rolfschr/GSWL-private-empty">ceci</a>.</p>
+
+<h1 id="rapports"><span class="header-section-number">3</span> Rapports</h1>
+<p>C'est bien beau d'avoir un journal, mais nous ne le gardons en fait que pour avoir un aperçu de notre situation financière. C'est là que les rapports arrivent. Un état affiche le journal d'une manière significative. Ledger peut produire des rapports de diverses façons, ce qui le rend extrêmement puissant. Les commandes les plus standard pour le reporting sont <code>balance</code> et <code>register</code>.</p>
+<h2 id="rapports-de-solde"><span class="header-section-number">3.1</span> Rapports de solde</h2>
+<p>Le rapport de bilan est très intuitif. Il crée un solde total à partir de toutes les transactions. La commande de base est :</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ledger</span> -f file.txt bal[ance]
+<span class="co"># or, in our case</span>
+$ <span class="kw">led</span> bal <span class="co"># alias defined by ecosystem/alias</span></code></pre></div>
+<p>La sortie est quelque chose comme :</p>
+<div class="sourceCode"><pre class="sourceCode diff"><code class="sourceCode diff">        $2145.00  Assets:Checking
+       $-1000.00  Equity:OpeningBalances
+         $192.00  Expenses
+          $65.00    Food:Groceries
+         $127.00    Unknown
+       $-1337.00  Income:Salary
+ ---------------
+               0</code></pre></div>
+<p>Normalement, vous voulez avoir un solde plus précis en mettant quelques restrictions sur le nom du compte, l'heure ou autre :</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Restrict by date.</span>
+$ <span class="kw">led</span> (--period<span class="kw">|-p</span>) <span class="st">&quot;last 6 months&quot;</span> <span class="kw">bal</span>
+$ <span class="kw">led</span> -p <span class="st">&quot;2042&quot;</span> bal
+
+<span class="co"># Restrict by account name.</span>
+$ <span class="kw">led</span> bal ^Expenses
+
+<span class="co"># Restrict by account names.</span>
+$ <span class="kw">led</span> bal ^Expe and not Groceries
+
+<span class="co"># Show all assets in the same currency (this assumes a prices database for conversion, see below).</span>
+<span class="kw">led</span> bal --exchange $ ^Assets
+
+<span class="co"># Do not show sub accounts.</span>
+<span class="kw">led</span> --depth 2 bal
+<span class="kw">led</span> --depth 3 bal <span class="co"># Note how the totals do not change.</span>
+
+<span class="co"># Do not indent accounts.</span>
+<span class="kw">led</span> --flat bal</code></pre></div>
+<h2 id="rapports-de-registre"><span class="header-section-number">3.2</span> Rapports de registre</h2>
+<p>Les rapports de registre affichent le journal comme un registre à l'ancienne. Les exemples d'arguments de ligne de commande comme ci-dessus s'appliquent, bien sûr.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Show the register report.</span>
+$ <span class="kw">led</span> reg
+<span class="co"># (The second last column gives the actual amount, the last column the running sum.)</span>
+
+<span class="co"># Restrict time span.</span>
+$ <span class="kw">led</span> -p <span class="st">&quot;2041&quot;</span> reg Assets
+
+<span class="co"># Show the running average.</span>
+$ <span class="kw">led</span> reg -A Restaurant
+<span class="co"># (Ignore the &quot;&lt;Adjustment&gt; lines&quot;. The 2nd column gives the running average.)</span>
+
+<span class="co"># Group by month.</span>
+$ <span class="kw">led</span> reg -M Food
+
+<span class="co"># Collapse transactions with multiple postings into one.</span>
+$ <span class="kw">led</span> reg -M -n Expenses <span class="co"># compare against &#39;led reg -M Expenses&#39;</span></code></pre></div>
+<h2 id="filtrage-avancé-des-rapports"><span class="header-section-number">3.3</span> Filtrage avancé des rapports</h2>
+<p>Les informations rapportées (balance ou register) peuvent être filtrées de manière plus sophistiquée. Ceci est réalisé soit par <code>--limit</code> (<code>-l</code>) soit par <code>--display</code> (<code>-d</code>). La différence entre les deux est que la première limite les écritures à prendre en compte pour les calculs tandis que la seconde limite les écritures à prendre en compte pour l'affichage. Cela signifie que les arguments (&quot;expression&quot;) utilisés conjointement avec <code>--limit</code> sont actifs pendant que Ledger parcourt le fichier journal. D'autre part, les expressions fournies à <code>--display</code> ne filtreront le résultat final <em>qu'après</em> avoir lu le journal complètement.</p>
+<p>À titre d'exemple, considérons que l'on veut avoir un aperçu du montant habituellement dépensé chaque mois. Autrement dit, nous sommes intéressés par la moyenne des dépenses mensuelles au cours des x derniers mois. Ceci peut être facilement réalisé par <code>led -M -n -A -p &quot;from 2041/11/01&quot; register ^Expenses</code>. Allez l'essayer dans le dépôt privé. Le rapport qui en résultera fera état du total des dépenses mensuelles à partir de novembre 2041 et calculera la moyenne mobile (dernière colonne). Maintenant, revenons à notre filtrage : Imaginez que vous n'êtes intéressé que par la moyenne de tous les mois combinés. Cette information n'est disponible qu'après avoir pris en compte le dernier mois évidemment. Cependant, toutes les dépenses mensuelles antérieures sont nécessaires pour la calculer. C'est là que la différence entre <code>--limit</code> et <code>--display</code> peut être facilement vue :</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Show monthly expenses &amp; average since Nov 2041</span>
+$ <span class="kw">led</span> -M -n -A --limit <span class="st">&quot;date&gt;=[2041/11/01]&quot;</span> reg ^Expenses</code></pre></div>
+<p>vs</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Show monthly expenses since Nov 2011 &amp; average monthly expense since the dawn of time</span>
+$ <span class="kw">led</span> -M -n -A --display <span class="st">&quot;date&gt;=[2041/11/01]&quot;</span> reg ^Expenses</code></pre></div>
+<p>Voyez en quoi la dernière valeur de la dernière colonne de la première ligne est différente de celle de la première commande. Ceci est dû au fait qu'il existe des données de journal antérieures au 2041/11/01 qui sont prises en compte pour le calcul de la moyenne lorsque l'on limite uniquement avec <code>--display</code>.</p>
+<p>Combiner les deux :</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Show monthly expenses for Mar 2042 &amp; average monthly expenses since Nov 2011</span>
+$ <span class="kw">led</span> -M -n -A --limit <span class="st">&quot;date&gt;=[2041/11/01]&quot;</span> --display <span class="st">&quot;date&gt;=[2042/03/01]&quot;</span> reg ^Expenses</code></pre></div>
+<p>Voyez comment la colonne moyenne change ? C'est exactement la différence entre le filtrage avant calcul (&quot;limit&quot;) ou avant présentation des résultats (&quot;display&quot;).</p>
+<p>Prenons un autre exemple : le journal suivant :</p>
+<div class="sourceCode"><pre class="sourceCode commonlisp"><code class="sourceCode commonlisp"><span class="dv">2042</span>/<span class="dv">01</span>/<span class="dv">15</span> <span class="kw">*</span> Random stuff <span class="dv">1</span>
+    <span class="co">; Earn $100, spend $50 and keep the rest at the bank.</span>
+    Income                                  $-<span class="dv">100</span>
+    Expenses                                $<span class="dv">50</span>
+    Bank                                    $<span class="dv">50</span>
+
+<span class="dv">2042</span>/<span class="dv">01</span>/<span class="dv">25</span> <span class="kw">*</span> Random stuff <span class="dv">2</span>
+    <span class="co">; Spend $150 taking the remaining $50 plus a $100 loan.</span>
+    Expenses                                $<span class="dv">150</span>
+    Bank                                    $-<span class="dv">150</span></code></pre></div>
+<p>Ici, quelqu'un vit au-dessus de ses moyens. Cette personne ne gagnait que 100 $, mais dépensait 200 $. La banque a apparemment accordé un prêt de 100 $ :</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">led</span> bal
+               <span class="ot">$-</span><span class="kw">100</span>  Bank
+                <span class="ot">$2</span><span class="kw">00</span>  Expenses
+               <span class="ot">$-</span><span class="kw">100</span>  Income
+<span class="kw">--------------------</span>
+                   <span class="kw">0</span>
+$ <span class="kw">led</span> reg
+<span class="kw">42-01-15</span> Random stuff 1         Income                        <span class="ot">$-</span>100        <span class="ot">$-</span>100
+                                <span class="kw">Expenses</span>                        <span class="ot">$5</span>0         <span class="ot">$-</span>50
+                                <span class="kw">Bank</span>                            <span class="ot">$5</span>0            0
+<span class="kw">42-01-25</span> Random stuff 2         Expenses                       <span class="ot">$1</span>50         <span class="ot">$1</span>50
+                                <span class="kw">Bank</span>                          <span class="ot">$-</span>150            0</code></pre></div>
+<p>Disons que nous voulons examiner tous les comptes qui ont un solde positif. Les expressions employées seraient <code>amount &gt; 0</code>. Mais selon que l'on utilise <code>--limit</code> ou <code>--display</code>, le résultat est très différent :</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ledger</span> bal -d <span class="st">&#39;amount &gt; 0&#39;</span>
+                <span class="ot">$2</span><span class="kw">00</span>  Expenses
+$ <span class="kw">led</span> bal -l <span class="st">&#39;amount &gt; 0&#39;</span> <span class="co"># limit postings for calculation</span>
+                 <span class="ot">$5</span><span class="kw">0</span>  Bank
+                <span class="ot">$2</span><span class="kw">00</span>  Expenses
+<span class="kw">--------------------</span>
+                <span class="ot">$2</span><span class="kw">50</span></code></pre></div>
+<p>La sortie de <code>--display</code> semble assez intuitive. En fin de compte, le compte de dépenses a un solde de 200€ alors que les autres sont négatifs. L'utilisation de <code>--limit</code> ne considère que les écritures (&quot;lignes&quot;) avec un montant positif : Pour la première transaction, cela signifie 50€ dans le compte des dépenses et 50€ dans le compte bancaire, pour la deuxième transaction nous avons 150€ de plus dans le compte des dépenses. On se retrouve donc avec un total de 250€.</p>
+<p>La plupart du temps, <code>--display</code> est ce que vous voulez. En fait, le résultat de <code>--limit</code> &amp; <code>--display</code> est souvent le même. Mais pas toujours :</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Show the total amount of $ ever sent to the bank account (only possible with -l).</span>
+$ <span class="kw">led</span> bal -l <span class="st">&#39;account =~ /Assets:Checking/ and amount &gt; 0&#39;</span> 
+
+<span class="co"># Get the amount of $ spent for books at RandomShop (-d is fine here, too).</span>
+$ <span class="kw">led</span> bal -l <span class="st">&#39;account =~ /Expenses:Books/ and payee =~ /RandomShop/&#39;</span> 
+
+<span class="co"># List all expenses higher than $100.</span>
+$ <span class="kw">led</span> reg  Expenses -l <span class="st">&#39;amount &gt; 100&#39;</span></code></pre></div>
+<p>Vous trouverez de plus amples renseignements sur la façon de filtrer les rapports dans la <a href="http://ledger-cli.org/3.0/doc/ledger3.html#Value-Expressions">documentation</a> en ligne de Ledger.</p>
+<h2 id="exemples-de-questions"><span class="header-section-number">3.4</span> Exemples de questions</h2>
+<p>Essayez d'obtenir les informations suivantes en utilisant le dépôt privé [question supplémentaire entre crochets]. Les réponses se trouvent à la page suivante.</p>
+<ol style="list-style-type: decimal">
+<li>Combien d'argent a été dépensé en épicerie [depuis le 1er janvier 2042] ?</li>
+<li>Combien d'argent a été dépensé pour le loyer et l'électricité ?</li>
+<li>Combien d'argent a été dépensé au total chaque mois [en moyenne] ?</li>
+<li>Quel est le revenu &quot;gagné&quot; qui n'est pas un salaire ?</li>
+<li>Combien d'argent a été dépensé en cadeaux (nom du compte) sur Amazon (nom du bénéficiaire) ?</li>
+</ol>
+
+<h3 id="réponses"><span class="header-section-number">3.4.1</span> Réponses</h3>
+<ol style="list-style-type: decimal">
+<li>Combien d'argent a été dépensé en épicerie [depuis le 1er janvier 2042] ?</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">led</span> bal Groceries
+<span class="co"># or</span>
+<span class="kw">led</span> bal -l <span class="st">&#39;account =~ /Groceries/&#39;</span>
+<span class="co"># With date restriction:</span>
+<span class="kw">led</span> bal Groceries -p <span class="st">&quot;since 2042/01/01&quot;</span>
+<span class="co"># or</span>
+<span class="kw">led</span> bal -l <span class="st">&#39;account =~ /Groceries/ and date &gt;= [2042/01/01]&#39;</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Combien d'argent a été dépensé pour le loyer et l'électricité ?</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">led</span> bal Expenses:Rent Electr
+<span class="co"># or</span>
+<span class="kw">led</span> bal -l <span class="st">&#39;account =~ /Expenses:Rent|Electr/&#39;</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>Combien d'argent a été dépensé au total chaque mois [en moyenne] ?</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">led</span> reg -n -M [-A] Expenses
+<span class="co"># or</span>
+<span class="kw">led</span> reg -n -M [-A] -l <span class="st">&#39;account =~ /^Expen/</span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>Quel est le revenu &quot;gagné&quot; qui n'est pas un salaire ?</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">led</span> reg Income and not Salary
+<span class="co"># or</span>
+<span class="kw">led</span> reg -l <span class="st">&#39;account =~ /Income/ and account !~ /Salary/&#39;</span></code></pre></div>
+<ol start="5" style="list-style-type: decimal">
+<li>Combien d'argent a été dépensé en cadeaux (nom du compte) sur Amazon (nom du bénéficiaire) ?</li>
+</ol>
+<p>Ceci ne peut être résolu que par <code>--limit</code> :</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">led</span> bal -l <span class="st">&#39;account =~ /Gifts/ and payee =~ /AMAZON/&#39;</span></code></pre></div>
+<p>En regardant les réponses, on se rend compte que l'interrupteur <code>--limit</code> semble souvent encombrant. Néanmoins, dans certaines situations, il se peut que vous deviez recourir à des expressions plus puissantes.</p>
+<h2 id="Recurring_Reports"><span class="header-section-number">3.5</span> Rapports récurrents</h2>
+<p>La plupart du temps, vous vous intéressez aux &quot;suspects habituels&quot;. Personnellement, j'ai de 5 à 10 rapports, que je veux toujours vérifier après avoir mis à jour le journal. De toute évidence, c'est une perte de temps de les taper à la main. Une façon de simplifier les choses serait de définir des alias (probablement énigmatique) pour chacun de ces rapports. Une autre façon est d'utiliser le script <code>reports.py</code> fourni dans le dépôt écosystème. Le script ouvre le fichier <code>reports.txt</code> dans le répertoire de travail courant et affiche les rapports prédéfinis un par un. Le fichier texte doit contenir des sections séparées par des lignes vides composées de commentaires (commençant par #) et de commandes réelles à exécuter. Vous pouvez invoquer le tout avec la commande <code>ledreports</code> (cela se fait en fait automatiquement dans la fenêtre &quot;overview&quot; de la session tmux). Le fichier <code>reports.txt</code> du répertoire de travail actuel peut ressembler à ceci :</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Each paragraph consists of explanations (&#39;# ...&#39;) and the cmd itself (last line).</span>
+<span class="co"># The first section is the header.</span>
+
+<span class="co"># Show the current journal status.</span>
+<span class="kw">led</span> bal
+
+<span class="co"># Show all transactions involving Food, then show transactions involving Transportation.</span>
+<span class="kw">led</span> reg Food
+<span class="kw">led</span> reg Transportation
+
+<span class="co"># Show expenses in percentage &amp; sort by amount.</span>
+<span class="kw">led</span> bal --percent --sort <span class="st">&quot;(total)&quot;</span> --depth 2 Expenses</code></pre></div>
+<p>Le script <code>reports.py</code> montrera les sections ci-dessus comme 3 pages distinctes avec chacune un ou plusieurs rapports. Vous pouvez parcourir les rapports listés en utilisant <code>j</code> et <code>k</code>. Dans la fenêtre du terminal, chaque rapport est préfixé par le commentaire et la commande réelle pour vous aider à comprendre ce qui se passe. Notez que le script source le fichier <code>alias</code> à partir de l'écosystème dans le répertoire de travail courant afin d'autoriser les commandes habituelles. Rappelez-vous que le fichier <code>alias</code> lui-même essaie de trouver le fichier <code>alias.local</code> dans le répertoire de travail courant, ce qui vous permet d'ajouter facilement vos propres fichiers.</p>
+<p>Essayez <code>ledreports</code> dans le repo privé :</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">sl</span> <span class="co"># &quot;start ledger&quot; as defined the .bashrc</span>
+$ <span class="kw">ledreports</span></code></pre></div>
+<h2 id="autres-rapports"><span class="header-section-number">3.6</span> Autres rapports</h2>
+<p>Tu veux essayer ça :</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">led</span> stats
+$ <span class="kw">led</span> accounts
+$ <span class="kw">led</span> payees
+$ <span class="kw">led</span> print
+$ <span class="kw">led</span> xml</code></pre></div>
+<h2 id="visualisation"><span class="header-section-number">3.7</span> Visualisation</h2>
+<p>Ledger est livré avec deux commutateurs pratiques (<code>-j/-J</code>) pour permettre d'alimenter le gnuplot (ou d'autres outils) avec ses sorties pour visualiser les données. Le rapport de registre peut être modifié pour n'éditer que la date et le montant actuel (<code>-j</code>) ou le total courant (<code>-J</code>).</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Output monthly expenses</span>
+$ <span class="kw">led</span> reg -n --monthly -j Expenses
+<span class="kw">2041-09-01</span> 509
+<span class="kw">2041-10-01</span> 484
+<span class="kw">2041-11-01</span> 955.49
+<span class="kw">2041-12-01</span> 809.49
+<span class="kw">2042-01-01</span> 455.5
+<span class="kw">2042-02-01</span> 285.5
+<span class="kw">2042-03-01</span> 882.47
+<span class="co"># Output cumulative monthly expenses</span>
+$ <span class="kw">led</span> reg -n --monthly -J Expenses
+<span class="kw">2041-09-01</span> 509
+<span class="kw">2041-10-01</span> 993
+<span class="kw">2041-11-01</span> 1948.49
+<span class="kw">2041-12-01</span> 2757.98
+<span class="kw">2042-01-01</span> 3213.48
+<span class="kw">2042-02-01</span> 3498.98
+<span class="kw">2042-03-01</span> 4381.45</code></pre></div>
+<p><code>ecosystem/alias</code> définit la fonction <code>ledplot</code>qui entoure gnuplot pour visualiser certaines données :</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">ledplot</span> -j -M -n reg Expenses <span class="co"># assuming gnuplot is installed</span></code></pre></div>
+<p>Certains des exemples de rapports contiennent quelques graphes prédéfinis que vous pouvez utiliser. Voir <code>private/reports.txt</code> pour plus d'informations.</p>
+
+<h1 id="updating-the-journal"><span class="header-section-number">4</span> Updating the journal</h1>
+<p>This chapter explains how the journal is updated. The work flow described here assumes that the journal update happens on a monthly basis. However, nothing prevents you from doing it differently.</p>
+<p>Remember that the journal keeps track of all financial transactions. Updating the journal happens in two steps: By manually adding transactions (everything without electronic record, i.e. cash transactions) and by using Ledger's in-built conversion method to automatically add CSV data. New data is then merged into the existing journal.</p>
+<h2 id="cash-transactions"><span class="header-section-number">4.1</span> Cash transactions</h2>
+<p>The <code>journal.txt</code> is never manipulated directly. Instead, it gets updated automatically using a combination of scripts and aliases (see later). However, cash transactions need to get into the ledger <em>somehow</em>. Cash transactions should be added to the file <code>misc.tmp.txt</code>. (The filename ends with <code>.tmp.txt</code> to denote that it shall never be put into version control. See the file <code>.gitignore</code>; obviously the private repo contains it for the sake of the example.)</p>
+<p>So, how do you deal with cash expenses in a double accounting system? You don't want to track every single dime and you don't want to ignore bigger cash expenses neither. The most convenient way is to assume that every dollar withdrawn is a dollar spent. In Ledger's double accounting speak, this means moving money from the account &quot;Assets:YourBank:Checking&quot; to &quot;Expenses:Unknown&quot;. Basically, you assume the money is gone. However, when you know how the money was spent, you just move it from &quot;Expenses:Unknown&quot; to whatever account you want. Although this not correct technically, the approach simplifies dealing with cash quite a lot. The cash was either spent on a specific account or it's an unknown expense.</p>
+<p>So tracking cash in <code>misc.tmp.txt</code> may look like this.</p>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="co">; This file lists all cash transactions that happened *after* the last</span>
+<span class="co">; journal update. Once this data has been added to journal, this file</span>
+<span class="co">; is emptied. Note how the scheme is always the same: move money from</span>
+<span class="co">; Expenses:Unknown to a specific account.</span>
+
+<span class="dv">2042</span>/<span class="dv">04</span>/<span class="dv">10</span> * Swimming
+    Expenses:Sports:Swimming                $<span class="fl">10.00</span>
+    Expenses:Unknown
+
+<span class="dv">2042</span>/<span class="dv">04</span>/<span class="dv">13</span> * Cinema
+    Expenses:Cinema                         $<span class="fl">15.00</span>
+    Expenses:Unknown
+
+<span class="dv">2042</span>/<span class="dv">04</span>/<span class="dv">18</span> * Tails of the City
+    Expenses:Books                          $<span class="fl">5.00</span>
+    Expenses:Unknown</code></pre></div>
+<p>We'll see later how the data in <code>misc.tmp.txt</code> is appended to the journal.</p>
+<h2 id="electronic-transactions"><span class="header-section-number">4.2</span> Electronic transactions</h2>
+<p>Spending cash money is just fine but most our transactions are electronic nowadays. Keeping track of theses transactions is actually quite easy. Virtually every financial institution (banks, credit unions, payment service provider, etc.) provides you with a CSV file that lists your transactions. You should probably change your bank if they don't provide this service.</p>
+<p>Ledger has the built-in command <code>convert</code> which automatically converts CSV files into Ledger's transaction format. The main feature of interest for us is the account recognition based on the transaction's payee. See <code>meta.txt</code> and look for &quot;payee&quot; to get a first feeling how that might work. We'll use this command in combination with an utility script to convert CSV files in a quite efficient way.</p>
+<p>For completeness, I would like you to check out <a href="https://github.com/cantino/reckon">reckon</a> and/or <a href="https://github.com/jwiegley/CSV2Ledger">csv2ledger</a>. Both are yet other approaches to convert CSV data. They did not suit my needs (see below) and it's obviously more fun to hack something together for your own work flow.</p>
+<h3 id="the-general-work-flow-for-electronic-transactions"><span class="header-section-number">4.2.1</span> The general work flow for electronic transactions</h3>
+<p>The work flow goes like this:</p>
+<ul>
+<li>Download the CSV file from the bank.</li>
+<li>Call the utility script to convert the input data.</li>
+<li>Check for &quot;unknown&quot; (= not yet recognized) transactions; modify <code>meta.txt</code> to match these bank transactions with your Ledger accounts.</li>
+<li>Repeat until done.</li>
+</ul>
+<p>Let's go through these steps in greater detail. Getting the CSV data depends obviously on the financial institution. It's handy to always save it to the same location in a &quot;machine readable name&quot; (ex: <code>CSV/bankname_&lt;month&gt;&lt;year&gt;.csv</code> or <code>CSV/bankname_latest.csv</code>) because this allows for easier scripting.</p>
+<p>The utility script (<code>ecosystem/convert.py</code>) manipulates the CSV data to make Ledger's <code>convert</code> understand it. This is mainly replacing the header lines and providing some more info for Ledger like the bank account's currency. Ledger's <code>convert</code> command expects the first line in the CSV file to describe the transaction columns of the remaining lines. One has to tell Ledger which columns represent the payee, the amount, the date and so on. For a CSV line like so ...</p>
+<pre><code>04/08/2042,05/08/2042,xx,xx-xx-xx,123456789,JOHN DOE,MONEY FOR LAST NIGHT,200.0</code></pre>
+<p>... the new header line may look like this:</p>
+<pre><code>,date,,,,payee,note,amount</code></pre>
+<p>That is, the second column codes for the date, the sixth for the payee and so on.</p>
+<p>The converter script needs this predefined header and other information for all your bank accounts (read: all your different CSV files). They are configured in <code>private/bankaccounts.yml</code>. This file is read in by the utility script. One example entry of that file may be:</p>
+<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml">    <span class="fu">Assets___BankName___CurrentAccount:</span>
+        <span class="fu">convert_header:</span> <span class="st">&#39;,date,,payee,note,,,amount&#39;</span>
+        <span class="fu">ignored_header_lines:</span> 7
+        <span class="fu">date_format:</span> <span class="st">&#39;%d.%m.%Y&#39;</span>
+        <span class="fu">currency:</span> <span class="st">&#39;EUR&#39;</span>
+        <span class="fu">ledger_args:</span> <span class="st">&#39;--invert&#39;</span>
+        <span class="fu">expenses_unknown:</span> <span class="st">&#39;Expenses:Unknown&#39;</span>
+        <span class="fu">ignored_transactions:</span>
+            <span class="kw">-</span> <span class="kw">[</span><span class="st">&#39;.*EXAMPLEPAYEENAME.*&#39;</span><span class="kw">,</span> <span class="st">&#39;.*PayPal.*&#39;</span><span class="kw">]</span>
+        <span class="fu">modify_transactions:</span>
+            <span class="kw">-</span> <span class="kw">[</span><span class="st">&#39;Name Surname&quot;;&quot;Unique Desc&#39;</span><span class="kw">,</span> <span class="st">&#39;Name Surname UniqueIdentifier&quot;;&quot;Unique Desc&#39;</span><span class="kw">]</span></code></pre></div>
+<p>The name of the root node equals the bank account's account name in Ledger where colons are replaced by 3 underscores. In the above case, that would mean the configured account is <code>Assets:BankName:CurrentAccount</code>. The sub-sections are:</p>
+<ul>
+<li><code>convert_header</code>: The header line mentioned above.</li>
+<li><code>ignored_header_lines</code>: The number of header lines in the original CSV file (which should be ignored).</li>
+<li><code>date_format</code>: The date format of the transaction entries (more <a href="http://www.ledger-cli.org/3.0/doc/ledger3.html#Date-and-Time-Format-Codes">here</a>).</li>
+<li><code>currency</code>: The currency used in this account.</li>
+<li><code>ledger_args</code>: Further ledger arguments (<code>--invert</code> inverts the input amounts).</li>
+<li><code>expenses_unknown</code> (optional): Ledger assigns money from unknown sources to the in-built account &quot;Expenses:Unknown&quot;. You may change that account if needed.</li>
+<li><code>ignored_transactions</code> (optional): A list of regular expressions for transactions to be ignored. For example, I always use this when moving money from one bank account to another. In this case, both CSV files contain the transaction. One shall be ignored.</li>
+<li><code>modify_transactions</code> (optional): A 2D list containing [old_regexp, replacement] to modify transactions if needed. This operates on the original input data without modifying it. For example, you may want to replace semicolons by commas: <code>[';', ',']</code>. The order of modifications is obviously important.</li>
+</ul>
+<p>The utility script also removes non-ASCII characters from the input file.</p>
+<p>You may wonder how Ledger's <code>convert</code> command actually matches transactions to Leger accounts? When defining accounts in Ledger, one may also provide a regular expression to identify an account by it's payee. For example:</p>
+<div class="sourceCode"><pre class="sourceCode diff"><code class="sourceCode diff">account Expenses:Food:Groceries
+ payee ^MegaSuperMarket</code></pre></div>
+<p>This not only defines the &quot;Expense:Food:Groceries&quot; account but also states that any transaction with the payee &quot;MegaSupermarket&quot; is associated with that account. This is where the <code>modify_transactions</code> variable from the <code>bankaccounts.yml</code> comes in handy: For example, when the same payee occurs in multiple transactions for different reasons you may want to modify a transaction to associate it with the correct account. You could for example modify the payee to include the transaction's note or description and then match the correct Ledger account by that combination (see the example above). Checkout <code>private/bankaccounts.yml</code> for some more ideas.</p>
+<p>When starting to fill your journal, you will likely need to modify your account matching quite often and then just rerun the converter script. Later on, this is rarely needed.</p>
+<p>After converting the CSV file to Ledger's format, it is saved in a temporary file in <code>./tmp/</code>. It might happen that you want to modify it then for whatever reasons.</p>
+<h2 id="putting-it-all-together-with-an-example"><span class="header-section-number">4.3</span> Putting it all together with an example</h2>
+<p>We now have all the pieces to update the journal in a consistent and efficient way. The overall procedure is:</p>
+<ul>
+<li>Update <code>misc.tmp.txt</code> whenever you think of it or when you empty you wallet.</li>
+<li>For each electronic account (bank account/credit card/payment service/etc.):
+<ul>
+<li>Download the CSV file from the service provider</li>
+<li>Convert the CSV file into a Ledger-formated file.</li>
+</ul></li>
+<li>Merge manually added &amp; automatically generated data. (will be shown in the example below)</li>
+<li>Append it to the actual <code>journal.txt</code>. (will be shown in the example below)</li>
+</ul>
+<p>There are aliases for most of the above steps. Check out the journal update section in <code>ecosystem/alias</code> and <code>private/alias.local</code> for details. Let's go over one example using the private repo.</p>
+<h3 id="update-misc.tmp.txt"><span class="header-section-number">4.3.1</span> Update <code>misc.tmp.txt</code></h3>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">mux</span> start GSWL-private <span class="co"># if not done yet</span>
+<span class="co"># jump to the window &#39;edit&#39; and open misc.tmp.txt</span></code></pre></div>
+<p>You will see that some transaction have already been added to that file. Feel free to add more postings. Just make sure you stay within the &quot;current&quot; month for the sake of the example (we're in May 2042 by the way ...).</p>
+<h3 id="Get_data_from_Northbank"><span class="header-section-number">4.3.2</span> Get data from NorthBank</h3>
+<p>In the sample repo, two banks a used as placeholders: NorthBank &amp; SouthBank. Imagine you would now go to your NorthBank online banking site and download the CSV data for the last month (the sample repo already contains this file):</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">mux</span> start GSWL-private <span class="co"># if not done yet</span>
+<span class="co"># not really using wget obviously!</span>
+$ <span class="kw">wget</span> https://banking.northbank.com/myaccount/latest.csv CSV/apr2042_northbank.csv</code></pre></div>
+<p>Note how I renamed the CSV file to a machine readable name (i.e. added the date in a consistent manner). This now enables us to parse the ledger file with a simple alias:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">mux</span> start GSWL-private <span class="co"># if not done yet</span>
+<span class="co"># jump to the window &#39;make&#39;</span>
+$ <span class="kw">lmnorthbank</span> <span class="co"># lm =~ last month, see private/alias.local</span></code></pre></div>
+<p>You should see the data from <code>CSV/apr2042_northbank.csv</code> converted into Ledger's format. The data is stored in <code>./tmp/northbank.tmp.txt</code> and shown with <code>less</code>; press <code>j/k/q</code> to move up/move down/quit. Some things of interest here:</p>
+<ul>
+<li>Sometimes, one needs to fix account matching or other stuff, so you may call <code>lmnorthbank</code> multiple times.</li>
+<li>In case you modified the output file by hand, a backup is stored in <code>./tmp/&lt;bank&gt;.tmp.txt.bak</code> to not overwrite your changes when running <code>lmnorthbank</code> again.</li>
+<li>See how Ledger automatically assigned the correct accounts. This is due to the <code>payee</code> directives in <code>GSWL-private/meta.txt</code>. In this example, you may want to try to match the book shop expenses correctly, too.</li>
+<li>One transaction has been ignored because money was moved to the SouthBank's account and also figures in that CSV file (see <code>bankaccounts.yml</code> for details).</li>
+</ul>
+<p>Furthermore, you will have noticed that some transactions include more than 2 postings, namely the electricity &amp; rent payments. This is due to Ledger's feature called &quot;Automated Transaction&quot;. The <a href="#Automated_Transactions">Advanced chapter</a> explains this in greater detail. For now, we'll keep the explanation short: The file <code>private/csv2journal.txt</code> is taken into account when converting CSV files. It contains automated transactions that should be applied to the actual transactions from the CSV file. This results in more than two Ledger account involved into a single bank transaction. When and how this can be used completely dependents on you. Again, the rent &amp; electricity example is explained further below and we can safely skip this for now.</p>
+<h3 id="get-data-from-southbank"><span class="header-section-number">4.3.3</span> Get data from SouthBank</h3>
+<p>This is much like NorthBank:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">mux</span> start GSWL-private <span class="co"># if not done yet</span>
+<span class="co"># jump to the window &#39;make&#39;</span>
+$ <span class="kw">wget</span> https://banking.southbank.com/account/data.csv CSV/apr2042_southbank.csv
+$ <span class="kw">lmsoutbhank</span></code></pre></div>
+<h3 id="merging-everything"><span class="header-section-number">4.3.4</span> Merging everything</h3>
+<p>At this point, we can merge the different sources (<code>misc.tmp.txt</code> &amp; bank account files in <code>private/tmp/*.txt</code>) and append them to <code>journal.txt</code>. The folder should now look like this:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ls</span> CSV <span class="co"># check whether we have &quot;downloaded&quot; the CSV files</span>
+<span class="kw">apr2042_northbank.csv</span>  apr2042_southbank.csv
+$ <span class="kw">ls</span> tmp <span class="co"># check whether we converted the CSV files</span>
+<span class="kw">apr2042_northbank.csv.tmp</span>  apr2042_northbank.csv.tmp.bak
+<span class="kw">apr2042_southbank.csv.tmp</span>  apr2042_southbank.csv.tmp.bak</code></pre></div>
+<p>Merging is achieved by the <code>lmmake</code> command (see <code>ecosystem/alias</code>). What this basically does is:</p>
+<ul>
+<li>Concatenate the different sources into one ledger file.</li>
+<li>Sort the merged file's transactions by date.</li>
+<li>Checkout a clean version of <code>journal.txt</code></li>
+<li>Append the new transactions to <code>journal.txt</code></li>
+<li>Output the new transactions with <code>less</code>.</li>
+</ul>
+<p>Let's go:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">mux</span> start GSWL-private <span class="co"># if not done yet</span>
+<span class="co"># jump to the window &#39;make&#39;</span>
+$ <span class="kw">lmmake</span>
+<span class="kw">2042/04/08</span> * Mr. Scrooge
+    ; <span class="kw">CSV</span> data:
+    ; <span class="kw">from</span> : 08/04/2042,xxx,xx-xx-xx,xxxxxxxx,Mr. Scrooge,520.00,,
+    ; <span class="kw">(raw):</span> 08/04/2042,xxx,xx-xx-xx,xxxxxxxx,Mr. Scrooge,520.00,,
+    <span class="kw">Expenses</span>:Rent                            <span class="ot">$5</span>20.00
+    <span class="kw">Assets</span>:NorthBank:Checking               <span class="ot">$-</span>520.00
+    <span class="kw">Expenses</span>:Rent                           <span class="ot">$-</span>260.00
+    <span class="kw">Receivables</span>:Flatmates                    <span class="ot">$2</span>60.00
+
+
+<span class="kw">2042/04/10</span> * Swimming
+    <span class="kw">Expenses</span>:Sports:Swimming                  <span class="ot">$1</span>0.00
+    <span class="kw">Expenses</span>:Unknown
+
+<span class="kw">2042/04/13</span> * Cinema
+    <span class="kw">Expenses</span>:Cinema                           <span class="ot">$1</span>5.00
+    <span class="kw">Expenses</span>:Unknown
+<span class="kw">...</span>
+
+$ <span class="kw">git</span> status
+<span class="kw">On</span> branch master
+<span class="kw">Changes</span> not staged for commit:
+  <span class="kw">(use</span> <span class="st">&quot;git add &lt;file&gt;...&quot;</span> to update what will be committed<span class="kw">)</span>
+  <span class="kw">(use</span> <span class="st">&quot;git checkout -- &lt;file&gt;...&quot;</span> to discard changes in working directory<span class="kw">)</span>
+
+        <span class="kw">modified</span>:   journal.txt
+
+<span class="kw">no</span> changes added to commit (use <span class="st">&quot;git add&quot;</span> and/or <span class="st">&quot;git commit -a&quot;</span>)
+$ <span class="kw">git</span> add journal.txt
+$ <span class="kw">git</span> commit -m <span class="st">&quot;Updated journal for April 2042&quot;</span></code></pre></div>
+<p>That's it! Use <code>lmclean</code> to wipe out everything in <code>./tmp</code> though you don't really need to do this. For the next update, remember to clean up <code>mist.tmp.txt</code>.</p>
+<p>A journal update is the right moment to fully appreciate the <code>ledreports</code> command because some of the reports defined in <code>private/reports.txt</code> refer to the &quot;last month&quot; (april 2042 in our example case). See <a href="#Recurring_Reports">above</a>.</p>
+
+<h1 id="Advanced"><span class="header-section-number">5</span> Advanced</h1>
+<p>This chapter introduces some advanced uses of Ledger.</p>
+<h2 id="formatting"><span class="header-section-number">5.1</span> Formatting</h2>
+<p>Although the default output of Ledger's report is sufficient in most cases, you sometimes want to change aspects of the output. Here are a couple of examples to get you started:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># make big expenses bold</span>
+$ <span class="kw">led</span> reg --bold-if <span class="st">&quot;amount&gt;100&quot;</span> ^Expenses
+
+<span class="co"># Cut account names</span>
+$ <span class="kw">led</span> reg --account-width 10
+
+<span class="co"># Assume bigger terminal size</span>
+$ <span class="kw">led</span> reg -w
+
+<span class="co"># Double the amount of each posting</span>
+$ <span class="kw">led</span> bal --amount <span class="st">&#39;2*a&#39;</span>
+
+<span class="co"># Invert all amounts</span>
+$ <span class="kw">led</span> bal --invert
+$ <span class="kw">led</span> bal --amount <span class="st">&#39;-a&#39;</span>
+
+<span class="co"># Show subtotals as percentage</span>
+$ <span class="kw">led</span> bal --percent
+$ <span class="kw">led</span> bal --%
+<span class="co"># If you use multiple currencies, you may need to specify --exchange (-X) to calculate percentages</span>
+$ <span class="kw">led</span> bal --exchange EUR --percent
+
+<span class="co"># Omit the last line in the balance report</span>
+$ <span class="kw">led</span> bal --no-total</code></pre></div>
+<p>The output format of any Ledger report can be customized even more. In general, there is a format flag for each type of report, say <code>--balance-format</code> or <code>--register-format</code>. However, you can always use <code>--format</code> (<code>-F</code>). This flag allows you to completely change any aspect of the report.</p>
+<p>The default format of the balance report is:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">led</span> bal -F <span class="st">&#39;%(ansify_if(justify(scrub(display_total), 20, 20 + int(prepend_width), true, color), \</span>
+<span class="st">    bold if should_bold)) %(!options.flat ? depth_spacer : &quot;&quot;) \</span>
+<span class="st">    %-(ansify_if(ansify_if(partial_account(options.flat), blue if color), bold if should_bold)) \</span>
+<span class="st">    \n%/%$1\n%/%(prepend_width ? &quot; &quot; * int(prepend_width) : &quot;&quot;)--------------------\n&#39;</span></code></pre></div>
+<p>This looks a bit scary at first, so let's go over this one by one:</p>
+<pre><code>%(ansify_if(
+  justify(scrub(display_total), 20,
+          20 + int(prepend_width), true, color),
+            bold if should_bold))</code></pre>
+<p>The above function roughly says: &quot;Output the total amount (<code>display_total</code>), justify it and prepend 20 characters. And make it bold if needed&quot;. This and the latter strings are executed for each posting of the transaction. For the balance report, this means for each account. The next line tells Ledger to put some whitespace for subcatogorical accounts. (Try out <code>--flat</code> to see the difference):</p>
+<pre><code>%(!options.flat ? depth_spacer : &quot;&quot;)</code></pre>
+<p>What follows is the account name; written in blue and bold if needed:</p>
+<pre><code>%-(ansify_if(
+   ansify_if(partial_account(options.flat), blue if color),
+             bold if should_bold))\n</code></pre>
+<p>The remaining part is special. The sequence '%/' separates the format string into stuff which should be printed for the first posting of each transactions and what should be printed for all postings. In the balance report, there is only &quot;one&quot; transaction. '$1' refers to the first element of the previous lines, in this case the total amount:</p>
+<pre><code>%/%$1\n
+%/%(prepend_width ? &quot; &quot; * int(prepend_width) : &quot;&quot;) --------------------\n&quot;)</code></pre>
+<p>Using the above pieces, you could create your own report format. As an example, the <code>ecoystem/alias</code> defines the function <code>ledbalper</code> which make use of this feature: The defined report format resembles the usual balance format but adds a percentage column. Try out <code>ledbalper Expenses</code> in the private repo to get an impression of how that looks like. Often, you will want to have the output sorted by total. This is achieved with <code>ledbalper --sort &quot;T&quot; Expenses:Transportation</code> or <code>ledbalper --sort &quot;T&quot; --flat Expenses:Transportation Expenses:MobileCommunication</code> (use <code>--flat</code> when combining subcategories on the same hierarchy level).</p>
+<h2 id="virtual-postings"><span class="header-section-number">5.2</span> Virtual postings</h2>
+<p>A virtual posting is not a real posting (sic!). Hence, virtual postings do not count when balancing out the transaction's postings to zero. A normal transaction ...</p>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="dv">2042</span>/<span class="dv">01</span>/<span class="dv">25</span> * Pizza
+    Expenses:Holidays             $<span class="fl">20.00</span>
+    Assets:Cash</code></pre></div>
+<p>... becomes:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ledger</span> bal
+             <span class="ot">$-</span><span class="kw">20.00</span>  Assets:Cash
+              <span class="ot">$2</span><span class="kw">0.00</span>  Expenses:Holidays
+<span class="kw">--------------------</span>
+                   <span class="kw">0</span></code></pre></div>
+<p>Whereas a transaction with virtual postings doesn't need to balance to zero:</p>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="dv">2042</span>/<span class="dv">01</span>/<span class="dv">25</span> * Pizza
+    <span class="co">; Spent the money during holidays. But actually for food.</span>
+    Expenses:Holidays            $<span class="fl">20.00</span>
+    Assets:Cash
+    (Expenses:Food)              $<span class="fl">20.00</span></code></pre></div>
+<p>Balance:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ledger</span> bal
+             <span class="ot">$-</span><span class="kw">20.00</span>  Assets:Cash
+              <span class="ot">$4</span><span class="kw">0.00</span>  Expenses
+              <span class="ot">$2</span><span class="kw">0.00</span>    Food
+              <span class="ot">$2</span><span class="kw">0.00</span>    Holidays
+<span class="kw">--------------------</span>
+             <span class="ot">$4</span><span class="kw">0.00</span></code></pre></div>
+<p>Or:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ledger</span> bal --real
+             <span class="ot">$-</span><span class="kw">20.00</span>  Assets:Cash
+              <span class="ot">$2</span><span class="kw">0.00</span>  Expenses:Holidays
+<span class="kw">--------------------</span>
+                   <span class="kw">0</span></code></pre></div>
+<p>That is, any virtual posting may be omitted by providing the <code>--real</code> argument:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ledger</span> bal Food
+             <span class="ot">$-</span><span class="kw">20.00</span>  Expenses:Food
+
+$ <span class="kw">ledger</span> bal Food --real
+<span class="co"># empty</span></code></pre></div>
+<p>You may use brackets (they look &quot;more strict&quot;) instead of parentheses to force virtual postings to balance out:</p>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="dv">2042</span>/<span class="dv">01</span>/<span class="dv">25</span> * Pizza
+    Expenses:Holidays            $<span class="fl">20.00</span>
+    Assets:Cash
+    [Expenses:Food]             $-<span class="fl">20.00</span>
+    [Equity:Food]                $<span class="fl">20.00</span></code></pre></div>
+<p>You'll ask what's the big deal about this? Well, virtual postings are very handy in combination with automated transactions ...</p>
+<h2 id="Automated_Transactions"><span class="header-section-number">5.3</span> Automated Transactions</h2>
+<p>An automated transaction is like a normal transaction except that it's header line does not contain the date but rather specifies under which circumstances the automated transaction should amend its postings to another transaction. Automated transaction need to be specified before any transaction they should apply to. An automated transaction is introduced with a &quot;=&quot;. The posting's amount may either be a total amount (in a commodity) or a percentage value.</p>
+<p>Examples:</p>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="co">; Whenever the posting&#39;s account matches &#39;food&#39;, add 100% of the value</span>
+<span class="co">; to it&#39;s corresponding account in the budget.</span>
+<span class="kw">=</span> food
+    (Budget:$account)                 <span class="dv">1</span>
+
+<span class="dv">2042</span>/<span class="dv">01</span>/<span class="dv">25</span> * Pizza
+    Expenses:Food                $<span class="fl">20.00</span>
+    Assets:Cash</code></pre></div>
+<p>When running through Ledger, the above entry becomes:</p>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme">    <span class="dv">2042</span>/<span class="dv">01</span>/<span class="dv">25</span> * Pizza
+        Expenses:Food                $<span class="fl">20.00</span>
+        (Budget:Expenses:Food)       $<span class="fl">20.00</span>
+        Assets:Cash                 $-<span class="fl">20.00</span></code></pre></div>
+<p>Or:</p>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="co">; When encountering Income:Sales, add 19% of the posting&#39;s</span>
+<span class="co">; value to Liabilities:Taxes.</span>
+<span class="kw">=</span> <span class="kw">/</span>^Income:Sales$/
+    (Liabiliites:Taxes)             <span class="fl">0.19</span>
+
+<span class="dv">2042</span>/<span class="dv">01</span>/<span class="dv">25</span> * Gotchas
+    <span class="co">; sold 43 gotchas the other day</span>
+    Income:Sales         (<span class="dv">43</span> * -$<span class="fl">39.99</span>)
+    Equity</code></pre></div>
+<p>Becomes:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ledger</span> reg
+<span class="kw">42-01-25</span> Gotchas                Income:Sales              <span class="ot">$-</span>1719.57    <span class="ot">$-</span>1719.57
+                                <span class="kw">Equity</span>                     <span class="ot">$1</span>719.57            0
+                                <span class="kw">(Liabilites</span>:Taxes<span class="kw">)</span>         <span class="ot">$-</span><span class="kw">326.72</span>     <span class="ot">$-</span>326.72</code></pre></div>
+<p>The following example (get <a href="https://gist.github.com/rolfschr/46ae069d15c062e2d5c0">Gist</a> online) refers to the automated transaction employed during the <a href="#Get_data_from_Northbank">journal update</a>:</p>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="co">; I live together with a flatmate. He transfers me money every month to cover</span>
+<span class="co">; for the rent &amp; utilities. I pay the bills for all flatmates. Hence, the total</span>
+<span class="co">; amount of money I transfer to say the electricity company is not what I spend</span>
+<span class="co">; myself on electricity. The automated transactions below splits up the money I</span>
+<span class="co">; receive from my flatmate into the different accounts and reduce the money I</span>
+<span class="co">; actually pay.</span>
+
+<span class="kw">=</span> expr account <span class="kw">=</span>~ /Expenses:Utilities:Phone/
+    <span class="co">; Make it look like paying $15 less when paying for the phone bill</span>
+    <span class="co">; and expect that amount from the flatmates.</span>
+    Expenses:Utilities:Phone                $-<span class="dv">15</span>
+    Receivables:Flatmates                   $<span class="dv">15</span>
+<span class="kw">=</span> expr account <span class="kw">=</span>~ /Expenses:Utilities:Electricity/
+    <span class="co">; Make it look like paying 50% less.</span>
+    Expenses:Utilities:Electricity          -<span class="fl">0.5</span>
+    Receivables:Flatmates                   <span class="fl">0.5</span>
+<span class="kw">=</span> expr account <span class="kw">=</span>~ /Expenses:Rent/ <span class="kw">and</span> payee <span class="kw">=</span>~ /Scrooge/
+    <span class="co">; Only deduct when paying money to that specific landlord.</span>
+    <span class="co">; Use &#39;$account&#39; as a placeholder to not repeat the account&#39;s name.</span>
+    $account                                $-<span class="dv">150</span>
+    Receivables:Flatmates                   $<span class="dv">150</span>
+
+<span class="co">; Here come the real transactions ...</span>
+
+<span class="dv">2042</span>/<span class="dv">01</span>/<span class="dv">15</span> * John Doe
+    <span class="co">; Here I received the money from my flatmate.</span>
+    Receivables:Flatmates                $-<span class="dv">205</span>
+    Assets:Checking
+
+<span class="dv">2042</span>/<span class="dv">01</span>/<span class="dv">23</span> * Mr. Scrooge
+    <span class="co">; Paying the rent to the landlord.</span>
+    Expenses:Rent                         $<span class="dv">300</span>
+    Assets:Checking
+
+<span class="dv">2042</span>/<span class="dv">01</span>/<span class="dv">25</span> * TalkTalkTalk Inc.
+    <span class="co">; Paying the phone bill.</span>
+    Expenses:Utilities:Phone               $<span class="dv">30</span>
+    Assets:Checking
+
+<span class="dv">2042</span>/<span class="dv">01</span>/<span class="dv">31</span> * HamsterWheel Ltd.
+    <span class="co">; Paying for electricity.</span>
+    Expenses:Utilities:Electricity         $<span class="dv">80</span>
+    Assets:Checking</code></pre></div>
+<p>From the recorded transactions above, we would expect to pay $300 + $30 + $80 = $410 to the various parties. However, due to the automated transaction, the money received from the flatmate is used to reduce this amount by 50%:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ledger</span> -f sample.txt bal ^Expenses
+                <span class="ot">$2</span><span class="kw">05</span>  Expenses
+                <span class="ot">$1</span><span class="kw">50</span>    Rent
+                 <span class="ot">$5</span><span class="kw">5</span>    Utilities
+                 <span class="ot">$4</span><span class="kw">0</span>      Electricity
+                 <span class="ot">$1</span><span class="kw">5</span>      Phone
+<span class="kw">--------------------</span>
+                <span class="ot">$2</span><span class="kw">05</span>
+
+$ <span class="kw">ledger</span> -f sample.txt reg ^Expenses
+<span class="kw">42-01-23</span> Mr. Scrooge            Expenses:Rent                  <span class="ot">$3</span>00         <span class="ot">$3</span>00
+                                <span class="kw">Expenses</span>:Rent                 <span class="ot">$-</span>150         <span class="ot">$1</span>50
+<span class="kw">42-01-25</span> TalkTalkTalk Inc.      Expens:Utilities:Phone          <span class="ot">$3</span>0         <span class="ot">$1</span>80
+                                <span class="kw">Expens</span>:Utilities:Phone         <span class="ot">$-</span>15         <span class="ot">$1</span>65
+<span class="kw">42-01-31</span> HamsterWheel Ltd.      Ex:Utiliti:Electricity          <span class="ot">$8</span>0         <span class="ot">$2</span>45
+                                <span class="kw">Ex</span>:Utiliti:Electricity         <span class="ot">$-</span>40         <span class="ot">$2</span>05</code></pre></div>
+<p>Grab the sample journal <a href="https://gist.github.com/rolfschr/46ae069d15c062e2d5c0">here</a>. You may use <code>--actual</code> to ignore the automated transactions. On the other hand, <code>--generated</code> will explicitly include auto-generated postings in the resulting journal. Go give both command line switches a try. (By the way: <code>--generated</code> is used in <code>ecosystem/convert.py</code>.)</p>
+<p>Here's another automated transaction example: I have a liability insurance and a household insurance both provided by the same insurance company. Whenever they withdraw money from my bank account, I want that money to be split up among the different insurance accounts.</p>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="co">; Note: An automated transaction applies to all matching postings.</span>
+<span class="co">; Matching by payee would apply the auto. trans. to all postings of a</span>
+<span class="co">; transaction. But we only want to apply it once. Hence, we will take</span>
+<span class="co">; the posting with the positive amount.</span>
+<span class="kw">=</span> expr payee <span class="kw">=</span>~ /Insurance Company X/ <span class="kw">and</span> amount <span class="kw">&gt;</span> <span class="dv">0</span>
+    Expenses:Insurance:Liability         $<span class="fl">5.31</span>
+    Expenses:Insurance:Household         $<span class="fl">3.87</span>
+    Expenses:Unknown                    $-<span class="fl">9.18</span></code></pre></div>
+<p>Given the above, the following transaction:</p>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="dv">2042</span>/<span class="dv">04</span>/<span class="dv">01</span> * Insurance Company X
+    Expenses:Unknown                     $<span class="fl">9.18</span>
+    Assets:Checking                     $-<span class="fl">9.18</span></code></pre></div>
+<p>Becomes:</p>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="dv">2042</span>/<span class="dv">04</span>/<span class="dv">01</span> * Insurance Company X
+    Expenses:Unknown                     $<span class="fl">9.18</span>
+    Assets:Checking                     $-<span class="fl">9.18</span>
+    Expenses:Insurance:Liability         $<span class="fl">5.31</span>
+    Expenses:Insurance:Household         $<span class="fl">3.87</span>
+    Expenses:Unknown                    $-<span class="fl">9.18</span></code></pre></div>
+<p>Another good use for automated transactions is grouping of accounts. As an example, all fixed cost that have to be paid every month can be linked together like so:</p>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme">account FixedCost
+
+<span class="kw">=</span> /Rent$/ <span class="kw">or</span> /Electricity$/ <span class="kw">or</span> /Insurance$/ <span class="kw">or</span> /Telephone$/
+    (FixedCost)                              <span class="dv">1</span></code></pre></div>
+<p>The above statement allows to query for (any change in) the fixed cost with <code>led reg FixedCost</code>. You'll have to add the appropriate accounts, of course.</p>
+<h2 id="resetting-a-balance"><span class="header-section-number">5.4</span> Resetting a balance</h2>
+<p>It may be possible that one of your Ledger account does not match it's value in real life. In this situation, Ledger allows you to set the account's value to a specific amount. This is achieved by using the &quot;=&quot; operator in front of the posting's amount.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">2042/04/01</span> Adjusting Checking account
+   <span class="kw">Assets</span>:Checking                  = <span class="ot">$1</span>190.63
+   <span class="kw">Equity</span>:Adjustments</code></pre></div>
+
+<h1 id="investing-with-ledger"><span class="header-section-number">6</span> Investing with Ledger</h1>
+<p>Like any other bookkeeper, Ledger allows you to track your investments. In the following, an &quot;investment&quot; is any asset that is not in dollars (or your local currency) but convertible to it. These assets will mainly be stocks but could potentially be anything. This chapter deals with investments in more detail but the general knowledge on how to deal with other commodities can be applied for other situations.</p>
+<h2 id="dealing-with-commodities-market-values"><span class="header-section-number">6.1</span> Dealing with commodities &amp; market values</h2>
+<p>Ledger doesn't make a difference between commodities (apples, stocks, ...) and currencies (USD, EUR, ...). Although it does not matter, it is common practice to put a currency symbol before the amount whereas a commodity symbol will be put behind. Sample currencies/commodities:</p>
+<pre><code>$42.00         ; USD (currency)
+€42.00         ; Euro (currency)
+42 Apple       ; Apples (commodity)
+42 AAPL        ; Shares (commodity)</code></pre>
+<p>Note that Ledger will pay attention to the format used for any commodity/currency and stick it accordingly. This is not only true for the symbol's position but also for white spaces or thousand marks (&quot;$5,000&quot;).</p>
+<p>In the following, &quot;commodity&quot; and &quot;currency&quot; will be used interchangeably.</p>
+<p>To allow Ledger to deal with different commodities, it has to know how to convert them. This is done by defining one commodity's value in terms of the other. Two approaches can be used: Either define the exchange rate in a specific price database (a text file, of course!). Or specifically mention the rate when adding a journal entry where a commodity needs to be converted. The latter is quite intuitive:</p>
+<div class="sourceCode"><pre class="sourceCode commonlisp"><code class="sourceCode commonlisp"><span class="dv">2042</span>/<span class="dv">05</span>/<span class="dv">01</span> <span class="kw">*</span> Opening Balance
+    <span class="co">; $5,000 in the bank.</span>
+    Assets:Checking                   $<span class="dv">5</span>,<span class="fl">000.00</span>
+    Equity:Opening Balances
+
+<span class="dv">2042</span>/<span class="dv">05</span>/<span class="dv">18</span> <span class="kw">*</span> Buying Stock
+    <span class="co">; &quot;Converting&quot; $1500 into 50 AAPL. Exchange rate is $30 per share.</span>
+    Assets:Broker                     <span class="dv">50</span> AAPL @ $<span class="fl">30.00</span>
+    Assets:Checking
+
+<span class="dv">2042</span>/<span class="dv">05</span>/<span class="dv">28</span> <span class="kw">*</span> Selling Stock
+    <span class="co">; Selling 10 shares which have doubled their value.</span>
+    Assets:Broker                     -<span class="dv">10</span> AAPL @ $<span class="fl">60.00</span>
+    Assets:Checking</code></pre></div>
+<p>Now, looking at some reports:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">led</span> --flat bal Assets
+             <span class="kw">40</span> AAPL  Assets:Broker
+           <span class="ot">$4</span>,<span class="kw">100.00</span>  Assets:Checking
+<span class="kw">--------------------</span>
+           <span class="ot">$4</span>,<span class="kw">100.00</span>
+             <span class="kw">40</span> AAPL
+
+$ <span class="kw">led</span> reg Assets
+<span class="kw">42-05-01</span> Opening Balance        Assets:Checking           <span class="ot">$5</span>,000.00    <span class="ot">$5</span>,000.00
+<span class="kw">42-05-18</span> Buying Stock           Assets:Broker               50 AAPL    <span class="ot">$5</span>,000.00
+                                                                         <span class="kw">50</span> AAPL
+                                <span class="kw">Assets</span>:Checking          <span class="ot">$-</span>1,500.00    <span class="ot">$3</span>,500.00
+                                                                         <span class="kw">50</span> AAPL
+<span class="kw">42-05-28</span> Selling Stock          Assets:Broker              -10 AAPL    <span class="ot">$3</span>,500.00
+                                                                         <span class="kw">40</span> AAPL
+                                <span class="kw">Assets</span>:Checking             <span class="ot">$6</span>00.00    <span class="ot">$4</span>,100.00
+                                                                         <span class="kw">40</span> AAPL</code></pre></div>
+<p>Forcing Ledger to display everything in a specific currency is achieved using <code>--exchange</code> or <code>-X</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">led</span> --flat -X $ bal Assets
+           <span class="ot">$2</span>,<span class="kw">400.00</span>  Assets:Broker
+           <span class="ot">$4</span>,<span class="kw">100.00</span>  Assets:Checking
+<span class="kw">--------------------</span>
+           <span class="ot">$6</span>,<span class="kw">500.00</span>
+
+$ <span class="kw">led</span> -X $ reg Assets
+<span class="kw">42-05-01</span> Opening Balance        Assets:Checking           <span class="ot">$5</span>,000.00    <span class="ot">$5</span>,000.00
+<span class="kw">42-05-18</span> Buying Stock           Assets:Broker             <span class="ot">$1</span>,500.00    <span class="ot">$6</span>,500.00
+                                <span class="kw">Assets</span>:Checking          <span class="ot">$-</span>1,500.00    <span class="ot">$5</span>,000.00
+<span class="kw">42-05-28</span> Commodities reval ued  <span class="kw">&lt;</span>Revalued<span class="kw">&gt;</span>                <span class="ot">$1</span>,500.00    <span class="ot">$6</span>,500.00
+<span class="kw">42-05-28</span> Selling Stock          Assets:Broker              <span class="ot">$-</span>600.00    <span class="ot">$5</span>,900.00
+                                <span class="kw">Assets</span>:Checking             <span class="ot">$6</span>00.00    <span class="ot">$6</span>,500.00</code></pre></div>
+<p>While defining exchange rates on a per transaction base is handy for the daily work, it does not provide the possibility to reflect current market valuations. For example, if one bought some shares a year ago, their value has most probably changed. How could Ledger know? A simple text file can be used to associate specific dates to exchange rates. The file's content may look like this:</p>
+<pre><code>; On that particular day, 1 bitcoin was worth 4242 Ether.
+P 2042/02/29 10:00:00 BTC 4242 ETH
+; On that particular day, 1 bitcoin was worth $1337.
+P 2042/02/29 10:00:00 BTC 1337 $
+; On that particular day, 1 share of AAPL was worth $3.14
+P 2042/02/29 10:00:00 AAPL 3.14 $</code></pre>
+<p>Having defined such a database, one can get the current market values by:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ledger</span> --price-db <span class="kw">&lt;</span>filename<span class="kw">&gt;</span> --market balance</code></pre></div>
+<p>Every once in a while, one can append current prices to the database. This allows the balance report to reflect the &quot;real&quot; values of any asset.</p>
+<p>The <code>led</code> command defined in <code>ecosystem/alias</code> expects the price database to be the file <code>prices.txt</code> and always reports current (=latest) market values.</p>
+<h2 id="reporting-gain-loss"><span class="header-section-number">6.2</span> Reporting gain &amp; loss</h2>
+<p>Let's have a look again at the last balance report from above:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">led</span> -X $ bal Assets
+           <span class="ot">$2</span>,<span class="kw">400.00</span>  Assets:Broker
+           <span class="ot">$4</span>,<span class="kw">100.00</span>  Assets:Checking
+<span class="kw">--------------------</span>
+           <span class="ot">$6</span>,<span class="kw">500.00</span></code></pre></div>
+<p>Remember that there were $5,000 in the checking account initially. Buying shares did not change the total amount of assets: $3,500 + 50 AAPL (valued $1,500). It is only on sell day that this figure changes. After having sold 10 shares for $60 each, a total of $600 is add to the checking account and removed from the broker account. And: The remaining 40 shares now value $60 each, too. Hence, The checking account values $3,500 + $600 = $4,100 while the broker account values (50 - 10) * $60 = $2,400.</p>
+<p>A total gain of $1,500 was achieved due to the shares doubling in valuation. This can be seen using <code>--gain</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">led</span> -X $ --gain bal Assets
+$ <span class="kw">ledger</span> --gain bal
+           <span class="ot">$1</span>,<span class="kw">500.00</span>  Assets:Broker
+$ <span class="kw">led</span> --gain reg
+<span class="kw">42-05-28</span> Commodities reval ued  <span class="kw">&lt;</span>Revalued<span class="kw">&gt;</span>                <span class="ot">$1</span>,500.00    <span class="ot">$1</span>,500.00</code></pre></div>
+<h2 id="asset-allocation"><span class="header-section-number">6.3</span> Asset Allocation</h2>
+<p>You may want to know how your money is distributed among different asset classes. This can be easily achieved by having distinct &quot;allocation&quot; accounts which will serve as placeholders whenever money is put into any asset class. Using automated transactions &amp; the virtual allocation accounts allow to get an easy overview. Consider the following:</p>
+<div class="sourceCode"><pre class="sourceCode commonlisp"><code class="sourceCode commonlisp">account AssetAllocation:P2PLending
+account AssetAllocation:Bonds
+account AssetAllocation:Stocks
+
+<span class="kw">=</span> /Receivables:P2PCompanyX/ <span class="kw">or</span> /Assets:P2PCompanyY/
+    (AssetAllocation:P2PLending)              <span class="dv">1</span>
+
+<span class="kw">=</span> expr (commodity == &#39;AAPL&#39;)
+    (AssetAllocation:Stocks)                  <span class="dv">1</span>
+
+<span class="kw">=</span> expr (commodity == &#39;FundsWithStocksAndBonds&#39;)
+    (AssetAllocation:Stocks)                <span class="fl">0.3</span>
+    (AssetAllocation:Bonds)                 <span class="fl">0.7</span></code></pre></div>
+<p>(This could be appended to the <code>meta.txt</code>.) Having the above automated transactions setup will keep track of all the investments in the virtual <code>AssetAllocation</code> accounts, too. One can then easily run:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">led</span> bal [--percent] AssetAllocation</code></pre></div>
+<p>to get a nice overview of the asset distribution. The advantage of this approach is that different accounts can be merged into one asset class for example. Or the other way around: Split up money from one account into different asset classes. The output will be something like</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">led</span> bal --percent AssetAllocation
+             <span class="kw">100.00%</span>  AssetAllocation
+              <span class="kw">17.10%</span>    Stocks
+              <span class="kw">43.95%</span>    P2PLending
+              <span class="kw">13.51%</span>    Bonds
+              <span class="kw">25.43%</span>    Cash</code></pre></div>
+
+<h1 id="la-fin"><span class="header-section-number">7</span> La fin</h1>
+<p>C'est la fin ! J'espère que vous avez aimé la balade.</p>
+<p>Pour toutes questions, suggestions ou commentaires généraux, contactez-moi via rolf point schr at gmail point com.</p>
+<p>Si vous avez aimé ce livre, veuillez envisager de soutenir <a href="http://ledger-cli.org/contribute.html">Ledger</a> :</p>
+<ul>
+<li>ajouter, corriger ou surveiller <a href="http://bugs.ledger-cli.org">bugs</a></li>
+<li>apporter sa contribution <a href="https://github.com/ledger">code</a></li>
+</ul>
+<p>ou moi directement :</p>
+<ul>
+<li>améliorer la qualité de ce livre <a href="https://github.com/rolfschr/GSWL-book">contenu</a></li>
+<li>m'acheter une bière <code>bitcoin:1JWADV8azQDUqUS3HXEABiLGW65qzwCJi4</code></li>
+</ul>
+<h2 id="contributions"><span class="header-section-number">7.1</span> Contributions</h2>
+<p>Les personnes suivantes ont aidé à terminer ou à mettre à jour ce livre :</p>
+<ul>
+<li>Ben Finney (general feedback)</li>
+<li>Christian Sillaber (general feedback, proof reading &amp; Vagrant setup)</li>
+<li>Colin Dean (macOS installation instructions)</li>
+<li>Daniele Pitrolo (proof reading)</li>
+<li>Georg Lutz (ecosystem patches)</li>
+<li>Klaus Thoden (proof reading)</li>
+<li>Nikita Tchayka (improved html version)</li>
+<li>Max Beutelspacher (ecosystem patches)</li>
+<li>Simon Michael (general feedback &amp; proof reading)</li>
+<li>Trannie Carter (epub version)</li>
+</ul>
+<p>Un grand merci à eux !</p>
+</body>
+</html>
