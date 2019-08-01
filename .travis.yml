@@ -10,12 +10,18 @@ script:
   - mv GettingStartedWithLedger.html public/latest.html
 
 deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  keep_history: true
-  name: $GITHUB_USERNAME
-  email: $GITHUB_EMAIL
-  local_dir: public
-  on:
-    branch: traduction_fr
+  - provider: pages
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    keep_history: true
+    name: $GITHUB_USERNAME
+    email: $GITHUB_EMAIL
+    local_dir: public
+    on:
+      branch: traduction_fr
+  - provider: releases
+    api_key: $GITHUB_TOKEN
+    file: "public/GettingStartedWithLedger.pdf"
+    skip_cleanup: true
+    on:
+      tags: true
