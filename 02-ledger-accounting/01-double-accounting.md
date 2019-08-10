@@ -1,18 +1,16 @@
-
-# Une introduction à Ledger #
+# Une introduction à Ledger
 
 Ce chapitre présente la philosophie de la comptabilité en partie double, Ledger comme outil en ligne de commande et son utilisation de base.
 
-
-## Comptabilité en partie double ##
+## Comptabilité en partie double
 
 La comptabilité en partie double est une approche comptable standard.
 En comptabilité, chaque type de dépenses ou de revenus et chaque "emplacement" qui détient une valeur monétaire est appelé un "compte" (pensez "catégorie").
 Des exemples de comptes peuvent être "Epicerie", "Vélo", "Vacances", "Compte chèque de la Banque X", "Salaire" ou "Hypothèque".
 Dans la comptabilité en partie double, on suit le flux d'argent d'un compte à l'autre.
 Un montant d'argent figure toujours deux fois ("double") dans les registres : A l'endroit d'où il vient et à l'endroit où il a été déplacé.
-C'est-à-dire, ajouter 1000€ *ici* signifie retirer 1000€ de *là* en même temps.
-En conséquence, *le solde total de tous les comptes est toujours nul*.
+C'est-à-dire, ajouter 1000€ _ici_ signifie retirer 1000€ de _là_ en même temps.
+En conséquence, _le solde total de tous les comptes est toujours nul_.
 L'argent n'est jamais ajouté à un compte sans indiquer d'où vient exactement le même montant.
 Toutefois, plus de deux comptes peuvent être impliqués dans une même transaction.
 
@@ -23,16 +21,16 @@ L'achat de produits d'épicerie et de détergents au supermarché peut faire pas
 En général, les noms de compte dépendent de la situation.
 Mais, on a habituellement les comptes principaux suivants :
 
-* Dépenses
-* Revenus
-* Actifs
-* Passifs
-* Créances
-* Fonds propres
+- Dépenses
+- Revenus
+- Actifs
+- Passifs
+- Créances
+- Fonds propres
 
 Le niveau de détail requis pour les sous-catégories ("Dépenses" -> "Epicerie" -> "Fruits" -> "Bananes") est à la hauteur des exigences.
 
-## Ledger ##
+## Ledger
 
 [Ledger](https://www.ledger-cli.org) est un outil en ligne de commande de comptabilité en partie double créé par [John Wiegley](http://newartisans.com/) avec une communauté de collaborateurs actifs.
 C'est un outil extrêmement puissant et il faut du temps et des efforts pour être en mesure de libérer sa puissance.
@@ -46,11 +44,11 @@ Ledger suit les bonnes vieilles traditions Unix et stocke les données dans des 
 Ces données comprennent principalement le journal avec les transactions et quelques méta-informations.
 Une transaction typique dans Ledger ressemble à ceci :
 
-~~~{.scheme}
+```{.scheme}
 2042/02/21 Shopping
-	Expenses:Food:Groceries                 $42.00
-	Assets:Checking                        -$42.00
-~~~
+    Expenses:Food:Groceries                 $42.00
+    Assets:Checking                        -$42.00
+```
 
 Toute transaction commence par une ligne d'en-tête contenant la date et quelques méta-informations (dans le cas ci-dessus seulement un commentaire décrivant la transaction).
 L'en-tête est suivi d'une liste des comptes impliqués dans la transaction (un "enregistrement" par ligne, chaque ligne commençant par un espace blanc).
@@ -58,18 +56,18 @@ Les comptes ont des noms arbitraires, mais Ledger utilise les deux points pour d
 Le nom du compte est suivi d'au moins deux espaces blancs et du montant d'argent qui a été ajouté (positif) ou supprimé (négatif) de ce même compte.
 En fait, Ledger est assez intelligent pour calculer le montant approprié aussi il aurait été parfaitement valide de n'écrire que :
 
-~~~{.scheme}
+```{.scheme}
 2042/02/21 Shopping
     Expenses:Food:Groceries                 $42.00
     Assets:Checking
-~~~
+```
 
 Le fichier journal est aussi simple que cela et il n'y a pas grand-chose à en savoir pour le moment.
 Notez que Ledger ne modifie jamais vos fichiers.
 
 Les transactions suivantes illustrent quelques concepts de base utilisés dans la double comptabilité et Ledger :
 
-~~~{.scheme}
+```{.scheme}
 ; The opening balance sets up your initial financial state.
 ; This is needed as one rarely starts with no money at all.
 ; Your opening balance is the first "transaction" in your journal.
@@ -112,56 +110,56 @@ Les transactions suivantes illustrent quelques concepts de base utilisés dans l
 2042/02/22 * Shopping
     Expenses:Food:Groceries
     Expenses:Unknown                       -$42.00
-~~~
+```
 
 L'exemple ci-dessus a déjà introduit quelques concepts sympathiques de Ledger.
 Cependant, la lecture du fichier texte est un peu ennuyeuse.
 Avant de laisser Ledger l'analyser pour nous, vous devrez probablement en premier lieu l'installer ...
 
-## Installation de Ledger ##
+## Installation de Ledger
 
 La dernière version de Ledger peut être obtenue sur son [site Web](https://www.ledger-cli.org/download.html).
 Je recommande d'avoir au moins la version 3.1 fonctionnelle.
 
 D'autres dépendances pour l'écosystème présenté dans ce livre sont :
 
-* [Git](http://git-scm.com/)
-* [Python](https://www.python.org/)
+- [Git](http://git-scm.com/)
+- [Python](https://www.python.org/)
 
 Facultatif mais recommandé :
 
-* [gnuplot](http://www.gnuplot.info/)
-* [tig](https://github.com/jonas/tig)
-* [tmux](http://tmux.sourceforge.net/)
-* [tmuxinator](https://github.com/tmuxinator/tmuxinator)
+- [gnuplot](http://www.gnuplot.info/)
+- [tig](https://github.com/jonas/tig)
+- [tmux](http://tmux.sourceforge.net/)
+- [tmuxinator](https://github.com/tmuxinator/tmuxinator)
 
-### Linux & BSD ###
+### Linux & BSD
 
 Vous trouverez ce dont vous avez besoin sur le [site de téléchargement](https://www.ledger-cli.org/download.html).
 
 Lorsque vous utilisez Linux, ce pourrait être juste une question de :
 
-~~~{.bash}
+```{.bash}
 $ sudo apt-get install ledger
 # or
 $ sudo yum install ledger
 # or ...
-~~~
+```
 
 Cependant, le paquet de la distribution peut être plus ancien que celui fourni sur le site de téléchargement.
 Ledger est livré avec une très bonne documentation d'installation.
 Reportez-vous à la [page Github](https://github.com/ledger/ledger) pour plus de détails.
 
-### macOS / OS X / Mac OS X ###
+### macOS / OS X / Mac OS X
 
 La façon la plus simple d'installer Ledger sur un Mac est avec [Homebrew](https://brew.sh/).
 Installez Homebrew en utilisant la méthode actuellement recommandée, puis installez Ledger avec une simple commande :
 
 ```{.bash}
-$ brew install ledger
+brew install ledger
 ```
 
-### Windows ###
+### Windows
 
 Ledger est difficile à exécuter sous Windows (vous auriez probablement besoin de le compiler vous-même et c'est souvent un casse-pieds sous Windows).
 De plus, l'installation présentée dans ce livre fait un usage intensif de l'infrastructure traditionnelle de la ligne de commande Unix.
@@ -172,29 +170,29 @@ Il vous sera tout à fait possible de vous connecter à votre machine virtuelle 
 
 Instructions étape par étape (sans Vagrant) :
 
-* Télécharger et installer [VirtualBox](https://www.virtualbox.org/).
-* Téléchargez une distribution ISO d'une distribution Linux de votre choix ([Ubuntu](http://www.ubuntu.com/desktop)?).
-* Installez Linux sur la machine virtuelle.
-* Installez le serveur OpenSSH *server* ("``$ sudo apt-get install openssh-server``" pour Ubuntu).
-* Assurez-vous que vous pouvez [accéder à la vm via SSH](http://stackoverflow.com/a/10532299).
-* Exécutez la machine en [mode headless](https://www.virtualbox.org/manual/ch07.html#vboxheadless) si vous le souhaitez.
-* Installez [babun](https://github.com/babun/babun) (construit sur [Cygwin](https://www.cygwin.com/)) sur votre machine Windows.
-* Connectez-vous à la vm via SSH.
-* Suivez les instructions pour installer Ledger sous Linux.
+- Télécharger et installer [VirtualBox](https://www.virtualbox.org/).
+- Téléchargez une distribution ISO d'une distribution Linux de votre choix ([Ubuntu](http://www.ubuntu.com/desktop)?).
+- Installez Linux sur la machine virtuelle.
+- Installez le serveur OpenSSH _server_ ("`$ sudo apt-get install openssh-server`" pour Ubuntu).
+- Assurez-vous que vous pouvez [accéder à la vm via SSH](http://stackoverflow.com/a/10532299).
+- Exécutez la machine en [mode headless](https://www.virtualbox.org/manual/ch07.html#vboxheadless) si vous le souhaitez.
+- Installez [babun](https://github.com/babun/babun) (construit sur [Cygwin](https://www.cygwin.com/)) sur votre machine Windows.
+- Connectez-vous à la vm via SSH.
+- Suivez les instructions pour installer Ledger sous Linux.
 
 Instructions étape par étape (avec Vagrant) :
 
-* Télécharger et installer [VirtualBox](https://www.virtualbox.org/) & [Vagrant](https://www.vagrantup.com/).
-* Téléchargez ce [Vagrantfile](https://github.com/rolfschr/GSWL-ecosystem/blob/master/contrib/Vagrantfile) depuis Github.
-* Ouvrez un terminal, allez à l'emplacement du Vagrantfile et lancez ``vagrant up`` (ceci configurera une machine Ubuntu avec Ledger installé).
-* Pour se connecter à la VM via SSH, utilisez ``vagrant up`` suivi de ``vagrant ssh`` depuis le même dossier.
+- Télécharger et installer [VirtualBox](https://www.virtualbox.org/) & [Vagrant](https://www.vagrantup.com/).
+- Téléchargez ce [Vagrantfile](https://github.com/rolfschr/GSWL-ecosystem/blob/master/contrib/Vagrantfile) depuis Github.
+- Ouvrez un terminal, allez à l'emplacement du Vagrantfile et lancez `vagrant up` (ceci configurera une machine Ubuntu avec Ledger installé).
+- Pour se connecter à la VM via SSH, utilisez `vagrant up` suivi de `vagrant ssh` depuis le même dossier.
 
-## Un premier avant-goût ##
+## Un premier avant-goût
 
-Avec une installation fonctionnelle de Ledger sur votre machine, récupérez ces [exemples de transactions](https://gist.github.com/rolfschr/318f1f91f8f845864568) depuis Github (cliquez sur le bouton 'Raw') et copiez-les dans un fichier texte appelé ``journal.txt``.
+Avec une installation fonctionnelle de Ledger sur votre machine, récupérez ces [exemples de transactions](https://gist.github.com/rolfschr/318f1f91f8f845864568) depuis Github (cliquez sur le bouton 'Raw') et copiez-les dans un fichier texte appelé `journal.txt`.
 Alors, lancez ceci :
 
-~~~{.bash}
+```{.bash}
 $ # Usage: ledger -f <journal-file> [...]
 $ ledger -f journal.txt balance
 $ ledger -f journal.txt balance Groceries
@@ -204,7 +202,7 @@ $ ledger -f journal.txt register
 # and type "balance", then  press Enter
 # (press ctrl+d to quit)
 $ ledger -f journal.txt
-~~~
+```
 
 Cela devrait vous donner une première impression sur Ledger.
 Vous en verrez plus dans le chapitre Rapports plus loin.
