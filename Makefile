@@ -10,7 +10,7 @@ PANDOC_LATEX_ARGS=-V lang=fr -V geometry:"top=2cm, bottom=1.5cm, left=1cm, right
 # pandoc highlight style
 # Options are `pygments` (the default), `kate`, `monochrome`, `espresso`, `zenburn`, `haddock`, and `tango`.
 # zenburn, espresso, haddock
-PANDOC_SYNTAX_HIGHLIGHT=--highlight-style=zenburn # --no-highlight
+PANDOC_SYNTAX_HIGHLIGHT=--highlight-style=haddock # --no-highlight
 # Use ":=" instead of "=" to only execute once
 GITSHA:=$(shell git rev-parse --short HEAD)
 TODAY:=$(shell date "+%d %B %Y")
