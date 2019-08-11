@@ -4,10 +4,7 @@ before_install:
   - sudo apt-get install -y texlive-full
 
 script:
-  - make html pdf
-  - mkdir public
-  - mv GettingStartedWithLedger.pdf public/
-  - mv GettingStartedWithLedger.html public/latest.html
+  - make public
 
 deploy:
   - provider: pages
