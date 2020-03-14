@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title>Prise en main de Ledger - 14 March 2020 58eb68c</title>
+  <title>Prise en main de Ledger - 14 March 2020 951782c</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 div.sourceCode { overflow-x: auto; }
@@ -44,13 +44,13 @@ code > span.in { color: #008000; } /* Information */
 <h1>Prise en main de Ledger</h1>
 <p>
 14 March 2020<br>
-58eb68c
+951782c
 </p>
 <p>
 Rolf Schröder & Contributeurs
 </p>
 <div id="header">
-<h1 class="title">Prise en main de Ledger - 14 March 2020 58eb68c</h1>
+<h1 class="title">Prise en main de Ledger - 14 March 2020 951782c</h1>
 </div>
 <div id="TOC">
 <ul>
@@ -71,7 +71,7 @@ Rolf Schröder & Contributeurs
 <li><a href="#méta-de-départ"><span class="toc-section-number">2.2.1</span> Méta de départ</a></li>
 <li><a href="#autres-fichiers"><span class="toc-section-number">2.2.2</span> Autres fichiers</a></li>
 </ul></li>
-<li><a href="#orchestrer-lécoystème-et-les-données-privées"><span class="toc-section-number">2.3</span> Orchestrer l'écoystème et les données privées</a></li>
+<li><a href="#orchestrer-lécosystème-et-les-données-privées"><span class="toc-section-number">2.3</span> Orchestrer l'écosystème et les données privées</a></li>
 <li><a href="#tmux-tmuxinator"><span class="toc-section-number">2.4</span> Tmux &amp; Tmuxinator</a></li>
 <li><a href="#votre-propre-configuration"><span class="toc-section-number">2.5</span> Votre propre configuration</a></li>
 </ul></li>
@@ -253,7 +253,7 @@ $ <span class="kw">ledger</span> -f journal.txt</code></pre></div>
 <p>Cela devrait vous donner une première impression sur Ledger. Vous en verrez plus dans le chapitre Rapports plus loin. Mais d'abord, nous devons mettre en place notre propre écosystème Ledger.</p>
 
 <h1 id="linstallation"><span class="header-section-number">2</span> L'installation</h1>
-<p>Tout au long de ce livre, nous utiliserons une configuration de Ledger spécifique. Deux dépôts sont utilisés pour séparer le code et les données. Le dossier &quot;ecosystem&quot; (voir <a href="https://github.com/rolfschr/GSWL-ecoystem">GSWL-ecosystem</a>) contient les scripts et d'autres choses pour manipuler le journal. D'autre part, le dossier &quot;privé&quot; contiendra les données financières réelles. J'ai fourni un exemple de dossier privé (voir <a href="https://github.com/rolfschr/GSWL-private">GSWL-private</a>) que nous utiliserons comme référence.</p>
+<p>Tout au long de ce livre, nous utiliserons une configuration de Ledger spécifique. Deux dépôts sont utilisés pour séparer le code et les données. Le dossier &quot;ecosystem&quot; (voir <a href="https://github.com/rolfschr/GSWL-ecosystem">GSWL-ecosystem</a>) contient les scripts et d'autres choses pour manipuler le journal. D'autre part, le dossier &quot;privé&quot; contiendra les données financières réelles. J'ai fourni un exemple de dossier privé (voir <a href="https://github.com/rolfschr/GSWL-private">GSWL-private</a>) que nous utiliserons comme référence.</p>
 <p>La division du code et des données permet de ne chiffrer que ce qui est nécessaire, de partager plus facilement le code commun et de permettre un contrôle de version indépendant.</p>
 <p>Le Readme de <a href="https://github.com/rolfschr/GSWL-private">GSWL-private</a> explique comment cloner les dépôts. Allez-y, allez les chercher.</p>
 <p>Regardons le contenu des dépôts :</p>
@@ -296,9 +296,9 @@ commodity €
 commodity BTC</code></pre></div>
 <p>L'exemple <code>meta.txt</code> n'inclut en effet pas d'autre configuration. Ou est-ce le cas ?</p>
 <h3 id="autres-fichiers"><span class="header-section-number">2.2.2</span> Autres fichiers</h3>
-<p>Ensuite, il y a un script Bash appelé <code>alias.local</code> qui contient les configurations locales. Ce script est automatiquement source par <code>ledger-ecoystem/alias</code>. C'est peut-être le moment de jeter un coup d'oeil à ces scripts. Essayez de découvrir à quoi ressemble la commande <code>led</code>, quel est le contenu de la variable d'environnement <code>$LAST_AMN</code> et comment <code>alias.local</code> est source.</p>
+<p>Ensuite, il y a un script Bash appelé <code>alias.local</code> qui contient les configurations locales. Ce script est automatiquement source par <code>ledger-ecosystem/alias</code>. C'est peut-être le moment de jeter un coup d'oeil à ces scripts. Essayez de découvrir à quoi ressemble la commande <code>led</code>, quel est le contenu de la variable d'environnement <code>$LAST_AMN</code> et comment <code>alias.local</code> est source.</p>
 <p>Enfin, les fichiers <code>bankaccounts.yml</code>, <code>csv2journal.txt</code> et <code>misc.tmp.txt</code> sont utilisés pour mettre à jour le journal de manière automatisée. <code>reports.txt</code> liste les questions posées à plusieurs reprises sur la situation financière. Tout cela est expliqué dans les chapitres suivants, mais n'hésitez pas à les inspecter immédiatement.</p>
-<h2 id="orchestrer-lécoystème-et-les-données-privées"><span class="header-section-number">2.3</span> Orchestrer l'écoystème et les données privées</h2>
+<h2 id="orchestrer-lécosystème-et-les-données-privées"><span class="header-section-number">2.3</span> Orchestrer l'écosystème et les données privées</h2>
 <p>Vous devriez avoir le modèle mental suivant de la configuration présentée : La plupart du code se trouve dans le dossier ecosystem. Toutes les données actuelles se trouvent dans le dossier privé. Travailler avec Ledger signifie travailler dans le dossier privé. Pour libérer la puissance de tous les scripts etc., il est nécessaire de source <code>ecosystem/alias</code> dans le dossier privé. Ceci source <code>alias.local</code> à partir du répertoire de travail courant. Le fichier d'alias local permet d'écraser les fonctionnalités de l'écosystème ou d'ajouter de nouvelles fonctionnalités.</p>
 <p>Le fait d'avoir l'écosystème de scripts et les données d'exemples disponibles permet d'avoir une idée plus précise du travail quotidien avec Ledger. Exécutez les commandes suivantes :</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span> ~/src/GSWL-private <span class="kw">&amp;&amp;</span> <span class="kw">source</span> ~/src/GSWL-ecosystem/alias <span class="co"># See GSWL-private/.bashrc for an alias!</span>
@@ -735,7 +735,7 @@ $ <span class="kw">led</span> bal --no-total</code></pre></div>
 <p>The remaining part is special. The sequence '%/' separates the format string into stuff which should be printed for the first posting of each transactions and what should be printed for all postings. In the balance report, there is only &quot;one&quot; transaction. '$1' refers to the first element of the previous lines, in this case the total amount:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">    <span class="kw">%/%</span><span class="ot">$1</span>\<span class="kw">n</span>
     <span class="kw">%</span>/<span class="kw">%</span>(prepend_width ? <span class="st">&quot; &quot;</span> * int(prepend_width) <span class="kw">:</span> <span class="st">&quot;&quot;</span>) <span class="kw">--------------------</span>\n<span class="st">&quot;)</span></code></pre></div>
-<p>Using the above pieces, you could create your own report format. As an example, the <code>ecoystem/alias</code> defines the function <code>ledbalper</code> which make use of this feature: The defined report format resembles the usual balance format but adds a percentage column. Try out <code>ledbalper Expenses</code> in the private repo to get an impression of how that looks like. Often, you will want to have the output sorted by total. This is achieved with <code>ledbalper --sort &quot;T&quot; Expenses:Transportation</code> or <code>ledbalper --sort &quot;T&quot; --flat Expenses:Transportation Expenses:MobileCommunication</code> (use <code>--flat</code> when combining subcategories on the same hierarchy level).</p>
+<p>Using the above pieces, you could create your own report format. As an example, the <code>ecosystem/alias</code> defines the function <code>ledbalper</code> which make use of this feature: The defined report format resembles the usual balance format but adds a percentage column. Try out <code>ledbalper Expenses</code> in the private repo to get an impression of how that looks like. Often, you will want to have the output sorted by total. This is achieved with <code>ledbalper --sort &quot;T&quot; Expenses:Transportation</code> or <code>ledbalper --sort &quot;T&quot; --flat Expenses:Transportation Expenses:MobileCommunication</code> (use <code>--flat</code> when combining subcategories on the same hierarchy level).</p>
 <h2 id="virtual-postings"><span class="header-section-number">5.2</span> Virtual postings</h2>
 <p>A virtual posting is not a real posting (sic!). Hence, virtual postings do not count when balancing out the transaction's postings to zero. A normal transaction ...</p>
 <div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="dv">2042</span>/<span class="dv">01</span>/<span class="dv">25</span> * Pizza
