@@ -61,7 +61,13 @@ slices: pdf
 	pdftk $(OUTPUT_PDF) cat 18 output $(OUTPUT_NAME)_preview_p18.pdf
 
 clean: ## remove generated and tmp files
-	rm -rf $(OUTPUT_MD) $(OUTPUT_PDF) $(TMP_DIR) $(OUTPUT_HTML) $(OUTPUT_EPUB)
+	rm -rf $(OUTPUT_MD) $(OUTPUT_PDF) $(TMP_DIR) $(OUTPUT_HTML) $(OUTPUT_EPUB) public/
+
+public: html pdf ## generated and copies in public folder
+	@mkdir -p public
+	@cp $(OUTPUT_PDF) public/
+	@cp $(OUTPUT_HTML) public/latest.html
+	@cp pandoc.css public/pandoc.css
 
 help: ## displays the description of each target (Default)
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
