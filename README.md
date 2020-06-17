@@ -1,4 +1,4 @@
-# Prise en main de Ledger - Le Livre
+# Prise en main de Ledger - Le Livre [![Build Status](https://travis-ci.org/deild/GSWL-book.svg?branch=traduction_fr)](https://travis-ci.org/deild/GSWL-book)
 
 > Forked & Translate by from [rolfschr/GSWL-book]
 
