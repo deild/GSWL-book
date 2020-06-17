@@ -53,7 +53,7 @@ Une transaction typique dans Ledger ressemble à ceci :
 Toute transaction commence par une ligne d'en-tête contenant la date et quelques méta-informations (dans le cas ci-dessus seulement un commentaire décrivant la transaction).
 L'en-tête est suivi d'une liste des comptes impliqués dans la transaction (un "enregistrement" par ligne, chaque ligne commençant par un espace blanc).
 Les comptes ont des noms arbitraires, mais Ledger utilise les deux points pour distinguer les sous-catégories.
-Le nom du compte est suivi d'au moins deux espaces blancs et du montant d'argent qui a été ajouté (positif) ou supprimé (négatif) de ce même compte.
+Le nom du compte est suivi d'au moins deux espaces (ou d'une tabulation) et du montant d'argent qui a été ajouté (positif) ou supprimé (négatif) de ce même compte.
 En fait, Ledger est assez intelligent pour calculer le montant approprié aussi il aurait été parfaitement valide de n'écrire que :
 
 ```{.scheme}
