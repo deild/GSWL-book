@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title>Prise en main de Ledger - 14 March 2020 ab0ec51</title>
+  <title>Prise en main de Ledger - 17 June 2020 261bdfa</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 div.sourceCode { overflow-x: auto; }
@@ -43,14 +43,14 @@ code > span.in { color: #008000; } /* Information */
 <body>
 <h1>Prise en main de Ledger</h1>
 <p>
-14 March 2020<br>
-ab0ec51
+17 June 2020<br>
+261bdfa
 </p>
 <p>
 Rolf Schröder & Contributeurs
 </p>
 <div id="header">
-<h1 class="title">Prise en main de Ledger - 14 March 2020 ab0ec51</h1>
+<h1 class="title">Prise en main de Ledger - 17 June 2020 261bdfa</h1>
 </div>
 <div id="TOC">
 <ul>
@@ -144,7 +144,7 @@ Rolf Schröder & Contributeurs
 <div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="dv">2042</span>/<span class="dv">02</span>/<span class="dv">21</span> Shopping
     Expenses:Food:Groceries                 $<span class="fl">42.00</span>
     Assets:Checking                        -$<span class="fl">42.00</span></code></pre></div>
-<p>Toute transaction commence par une ligne d'en-tête contenant la date et quelques méta-informations (dans le cas ci-dessus seulement un commentaire décrivant la transaction). L'en-tête est suivi d'une liste des comptes impliqués dans la transaction (un &quot;enregistrement&quot; par ligne, chaque ligne commençant par un espace blanc). Les comptes ont des noms arbitraires, mais Ledger utilise les deux points pour distinguer les sous-catégories. Le nom du compte est suivi d'au moins deux espaces blancs et du montant d'argent qui a été ajouté (positif) ou supprimé (négatif) de ce même compte. En fait, Ledger est assez intelligent pour calculer le montant approprié aussi il aurait été parfaitement valide de n'écrire que :</p>
+<p>Toute transaction commence par une ligne d'en-tête contenant la date et quelques méta-informations (dans le cas ci-dessus seulement un commentaire décrivant la transaction). L'en-tête est suivi d'une liste des comptes impliqués dans la transaction (un &quot;enregistrement&quot; par ligne, chaque ligne commençant par un espace blanc). Les comptes ont des noms arbitraires, mais Ledger utilise les deux points pour distinguer les sous-catégories. Le nom du compte est suivi d'au moins deux espaces (ou d'une tabulation) et du montant d'argent qui a été ajouté (positif) ou supprimé (négatif) de ce même compte. En fait, Ledger est assez intelligent pour calculer le montant approprié aussi il aurait été parfaitement valide de n'écrire que :</p>
 <div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="dv">2042</span>/<span class="dv">02</span>/<span class="dv">21</span> Shopping
     Expenses:Food:Groceries                 $<span class="fl">42.00</span>
     Assets:Checking</code></pre></div>
@@ -1017,7 +1017,7 @@ account AssetAllocation:Stocks
 <p>Pour toutes questions, suggestions ou commentaires généraux, contactez-moi via github.</p>
 <p>Si vous avez aimé ce livre, veuillez envisager de soutenir <a href="http://ledger-cli.org/contribute.html">Ledger</a> :</p>
 <ul>
-<li>ajouter, corriger ou surveiller <a href="http://bugs.ledger-cli.org">bugs</a></li>
+<li>ajouter, corriger ou surveiller <a href="https://github.com/ledger/ledger/issues/">bugs</a></li>
 <li>apporter sa contribution <a href="https://github.com/ledger">code</a></li>
 </ul>
 <p>ou directement :</p>
