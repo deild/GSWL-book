@@ -23,7 +23,7 @@ PANDOC_PDF_ARGS= --include-before $(TMP_BEFORE_TEX)
 PANDOC_HTML_ARGS= --include-before $(TMP_HTML_HEADER) --metadata "title=Prise en main de Ledger - $(TODAY) $(GITSHA)" --standalone --css pandoc.css
 PANDOC_EPUB_ARGS= $(TMP_EPUB_TITLE)
 
-all: pdf epub slices html ## launch all generation target
+all: pdf epub html ## launch all generation target
 
 pre: before.tex epub_title.txt html_header.html
 	mkdir -p $(TMP_DIR)
@@ -52,6 +52,7 @@ epub: md ## use pandoc to generate LaTeX & epub file
 latex: md ## use pandoc to generate LaTeX file
 	@$(PANDOC_EXEC) $(OUTPUT_MD) $(PANDOC_ARGS) -o $(OUTPUT_TEX)
 
+# need https://stackoverflow.com/questions/20804441/how-to-install-pdftk-on-mac-os-x
 slices: pdf
 	@# csv conversion
 	pdftk $(OUTPUT_PDF) cat 9 output $(OUTPUT_NAME)_preview_p9.pdf
