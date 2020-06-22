@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title>Prise en main de Ledger - 17 June 2020 383e8d8</title>
+  <title>Prise en main de Ledger - 22 June 2020 8725915</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 div.sourceCode { overflow-x: auto; }
@@ -43,14 +43,14 @@ code > span.in { color: #008000; } /* Information */
 <body>
 <h1>Prise en main de Ledger</h1>
 <p>
-17 June 2020<br>
-383e8d8
+22 June 2020<br>
+8725915
 </p>
 <p>
 Rolf Schröder & Contributeurs
 </p>
 <div id="header">
-<h1 class="title">Prise en main de Ledger - 17 June 2020 383e8d8</h1>
+<h1 class="title">Prise en main de Ledger - 22 June 2020 8725915</h1>
 </div>
 <div id="TOC">
 <ul>
@@ -381,11 +381,11 @@ $ <span class="kw">led</span> reg -M -n Expenses <span class="co"># compare agai
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Show monthly expenses &amp; average since Nov 2041</span>
 $ <span class="kw">led</span> -M -n -A --limit <span class="st">&quot;date&gt;=[2041/11/01]&quot;</span> reg ^Expenses</code></pre></div>
 <p>vs</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Show monthly expenses since Nov 2011 &amp; average monthly expense since the dawn of time</span>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Show monthly expenses since Nov 2041 &amp; average monthly expense since the dawn of time</span>
 $ <span class="kw">led</span> -M -n -A --display <span class="st">&quot;date&gt;=[2041/11/01]&quot;</span> reg ^Expenses</code></pre></div>
 <p>Voyez en quoi la dernière valeur de la dernière colonne de la première ligne est différente de celle de la première commande. Ceci est dû au fait qu'il existe des données de journal antérieures au 2041/11/01 qui sont prises en compte pour le calcul de la moyenne lorsque l'on limite uniquement avec <code>--display</code>.</p>
 <p>Combiner les deux :</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Show monthly expenses for Mar 2042 &amp; average monthly expenses since Nov 2011</span>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Show monthly expenses for Mar 2042 &amp; average monthly expenses since Nov 2041</span>
 $ <span class="kw">led</span> -M -n -A --limit <span class="st">&quot;date&gt;=[2041/11/01]&quot;</span> --display <span class="st">&quot;date&gt;=[2042/03/01]&quot;</span> reg ^Expenses</code></pre></div>
 <p>Voyez comment la colonne moyenne change ? C'est exactement la différence entre le filtrage avant calcul (&quot;limit&quot;) ou avant présentation des résultats (&quot;display&quot;).</p>
 <p>Prenons un autre exemple : le journal suivant :</p>
@@ -551,7 +551,7 @@ $ <span class="kw">led</span> reg -n --monthly -J Expenses
 <p>We'll see later how the data in <code>misc.tmp.txt</code> is appended to the journal.</p>
 <h2 id="electronic-transactions"><span class="header-section-number">4.2</span> Electronic transactions</h2>
 <p>Spending cash money is just fine but most our transactions are electronic nowadays. Keeping track of theses transactions is actually quite easy. Virtually every financial institution (banks, credit unions, payment service provider, etc.) provides you with a CSV file that lists your transactions. You should probably change your bank if they don't provide this service.</p>
-<p>Ledger has the built-in command <code>convert</code> which automatically converts CSV files into Ledger's transaction format. The main feature of interest for us is the account recognition based on the transaction's payee. See <code>meta.txt</code> and look for &quot;payee&quot; to get a first feeling how that might work. We'll use this command in combination with an utility script to convert CSV files in a quite efficient way.</p>
+<p>Ledger has the built-in command <code>convert</code> which automatically converts CSV files into Ledger's transaction format. The main feature of interest for us is the account recognition based on the transaction's payee. See <code>meta.txt</code> and look for &quot;payee&quot; to get a first feeling how that might work. We'll use this command in combination with a utility script to convert CSV files in a quite efficient way.</p>
 <p>For completeness, I would like you to check out <a href="https://github.com/cantino/reckon">reckon</a> and/or <a href="https://github.com/jwiegley/CSV2Ledger">csv2ledger</a>. Both are yet other approaches to convert CSV data. They did not suit my needs (see below) and it's obviously more fun to hack something together for your own work flow.</p>
 <h3 id="the-general-work-flow-for-electronic-transactions"><span class="header-section-number">4.2.1</span> The general work flow for electronic transactions</h3>
 <p>The work flow goes like this:</p>
